@@ -11,27 +11,29 @@ Be sure to do both parts!
 
 ## Add the Detail View to our Movie App
 
-For this weekend challenge you'll be expanding on a movie management application! We're already able to see movies that exist in our DB. We'll need to be able to see detailed view for each individual movie, including all genres associated with that movie. This is a very common pattern, to go from a list to showing more information about a single item. 
+For this weekend challenge you'll be expanding on a movie management application! We're already able to see movies that exist in our DB. We'll need to be able to see detailed view for each individual movie, including all genres associated with that movie. This is a very common pattern, to go from a list to showing more information about a single item.
 
 ## Database Setup
 
-1. Create a database named `saga_movies_weekend`
-2. Run the queries from `database.sql` on the `saga_movies_weekend` database
+[x] Create a database named `saga_movies_weekend`
+[x] Run the queries from `database.sql` on the `saga_movies_weekend` database
 
 ## Install Dependencies
 
-1. `npm install`
-2. `npm run server`
-3. `npm run client`
+[x]  `npm install`
+[x]  `npm run server`
+[x]  `npm run client`
 
 ## Notes
 
 ### Table Relationships
+
 Genres can be applied to many different movies. Movies can have multiple genres. This is Many-to-Many! Junction Table time!
 
 We've given you the database complete with a junction table and data for `movies_genres`.
- 
+
 ### Movie Poster Images
+
 We've added some movie posters in the `public/images` folder, and the database is set up to use them. If you want your own posters, you'll want to add the files there!
 
 ---
@@ -42,7 +44,7 @@ We've added some movie posters in the `public/images` folder, and the database i
 
 ### Home / List Page
 
-This view is completed already! It displays all of the movies in the movie database. 
+This view is completed already! It displays all of the movies in the movie database.
 
 - TODO: When a movie poster is clicked, a user should be brought to the `/details` view for that movie.
 
@@ -53,8 +55,6 @@ This should show all details **including ALL genres** for the selected movie, in
 - TODO: The details page should have a `Back to List` button, which should bring the user to the Home/List Page
 
 > Base functionality does not require the movie details to load correctly after refresh of the browser.
-
-
  > Hint : You can make a GET request for a specific movie. Remember `req.params` and `:id`?
 ---
 
@@ -90,15 +90,15 @@ The Add Movie page should have the buttons:
 **Base functionality does not require being able to select more than one genre for a new movie**
 
 > Hint: Look at the /api/movie POST route -- it's been made already but is performing 2 queries: one to store the movie information and another to store the genre in the junction table.
-
 > Hint: You'll want to use the genres that are in the db for your dropdown
 
-
 ### 2. Refresh on Details Page
+
 Allow the app to maintain on refresh our details page.
-Research [React Router URL PARAMS](https://reactrouter.com/web/example/url-params) 
+Research [React Router URL PARAMS](https://reactrouter.com/web/example/url-params)
 
 ### 3. Edit Page (Stretch)
+
 Add to the detail page an edit button that brings the user to the edit page.
 
 This new page should show:
@@ -120,4 +120,3 @@ The edit page should have the buttons:
 - [ ] Allow the user to add a genre to a movie.
 - [ ] Allow the user to remove a genre from a movie.
 - [ ] Only display the top 10 movies, and allow the user to search for movie titles with a search bar on the home page (you can do this on the client side or the server side, server side is a bigger stretch, but good practice).
-

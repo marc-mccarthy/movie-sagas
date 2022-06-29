@@ -1,0 +1,25 @@
+.movieItem {
+    width: 225px;
+    height: 350px;
+    margin: 10px;
+}
+
+.movieItemContainer {
+    display: flex;
+    justify-content: center;
+}
+
+h2 {
+    margin-top: 100px;
+}
+
+#movieItemImage, #movieItemDescription {
+    width: 450px;
+    height: auto;
+    margin: 30px;
+}
+
+#movieItemDescription {
+    font-size: 18px;
+    text-align: left;
+}
