@@ -1,14 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './Details.css'
 import {useSelector, useDispatch} from 'react-redux';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import GenresItem from '../GenresItem/GenresItem';
 
 function Details(props) {
 
+    let {id} = useParams();
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_MOVIES' });
+        console.log(id)
+    }, []);
+
     const dispatch = useDispatch();
     const history = useHistory();
-    const movie = useSelector(store => store.thisMovie)
 
     const backToList = () => {
         history.push("/")
@@ -16,9 +22,8 @@ function Details(props) {
 
     return (
         <div>
-            <h2>{JSON.stringify(movie[0])}</h2>
-            <h2>{JSON.stringify(movie[0].title)}</h2>
-            <h2>{JSON.stringify(movie[0].poster)}</h2>
+            <h2></h2>
+
         </div>
     )
 
