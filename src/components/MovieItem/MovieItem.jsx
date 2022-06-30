@@ -9,9 +9,8 @@ function MovieItem(props) {
     const history = useHistory();
 
     const showDetails = () => {
-        console.log(props.movie.id)
         dispatch({type: 'THIS_MOVIE', payload: props.movie.id})
-        history.push('/details')
+        history.push(`/details?${props.movie.id}`)
     }
 
     return (

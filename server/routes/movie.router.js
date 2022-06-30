@@ -13,10 +13,11 @@ router.get('/', (req, res) => {
 });
 
 router.get('/details', (req, res) => {
-    const query = `SELECT * FROM "movies" WHERE id=$1`;
+    const query = `SELECT * FROM movies WHERE id=$1;`;
     const values = [req.query.id];
     pool.query(query, values).then(result => {
-        res.send(result.rows[0])
+        // console.log(result.rows)
+        res.send(result.rows)
     }).catch(error => {
         console.log(`ERROR: Get this movie: ${error}`)
     })
