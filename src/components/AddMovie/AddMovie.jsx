@@ -12,12 +12,12 @@ function AddMovie() {
     const dispatch = useDispatch();
 
     const [title, setTitle] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
+    const [poster, setPoster] = useState("");
     const [description, setDescription] = useState("");
     const [genres, setGenres] = useState([]);
 
     const addMoviePage = () => {
-        dispatch({ type: 'ADD_MOVIE_SAGA', payload: { title: title, imageUrl: imageUrl, description: description, genres: genres } });
+        dispatch({ type: 'ADD_MOVIE_SAGA', payload: { title: title, poster: poster, description: description, genres: genres } });
         history.push('/');
     }
 
@@ -26,7 +26,7 @@ function AddMovie() {
     }
 
     const changeImageUrl = (event) => {
-        setImageUrl(event.target.value);
+        setPoster(event.target.value);
     }
 
     const changeDescription = (event) => {
@@ -52,7 +52,7 @@ function AddMovie() {
     return (
         <div>
             <h2>Add New Movie</h2>
-            <Grid align="center" spacing={3} sx={{ width: 300 }}>
+            <Stack direction="row" spacing={3}>
                 <TextField required id="movie-title" onChange={changeTitle} label="Title" placeholder="Tropic Thunder" variant="standard"/>
                 <TextField required id="movie-image-url" onChange={changeImageUrl} label="Image Url" placeholder="/images/tropic-thunder.jpg" variant="standard" />
                 <TextField required id="movie-description" onChange={changeDescription} label="Description" placeholder="Funniest movie of all time!" variant="standard" />
@@ -64,8 +64,11 @@ function AddMovie() {
                     getOptionLabel={(genres) => genres.label}
                     placeholder="Select Genres"
                 />
-                <Button variant="contained" color="primary" onClick={addMoviePage}>Add Movie</Button>
-            </Grid>
+            </Stack>
+            <Stack direction="row" mt={3} spacing={3} sx={{ width: 300 }}>
+                <Button variant="outlined" color="secondary" onClick={() => history.push('/')}>Cancel</Button>
+                <Button variant="contained" color="primary" onClick={addMoviePage}>Save</Button>
+            </Stack>
         </div>
     );
 }

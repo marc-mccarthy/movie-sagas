@@ -17,7 +17,7 @@ import theme from './theme';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('THIS_MOVIE', fetchThisMovie);
-    yield takeEvery('ADD_MOVIE_SAGA', addMovieSaga);
+    yield takeEvery('ADD_MOVIE_SAGA', addMovie);
 }
 
 function* fetchAllMovies() {
@@ -39,6 +39,17 @@ function* fetchThisMovie(action) {
         yield put({type: 'SET_MOVIE', payload: movie.data})
     } catch {
         console.log('get all error');
+    }
+}
+
+function* addMovie(action) {
+    // add a movie to the DB
+    try {
+        console.log(`Add this movie: ${action.payload}`)
+        yield axios.post('/api/movie', action.payload);
+        yield put({type: 'FETCH_MOVIES'});
+    } catch {
+        console.log('add error');
     }
 }
 
