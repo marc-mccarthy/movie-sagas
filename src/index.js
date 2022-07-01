@@ -17,6 +17,7 @@ import theme from './theme';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('THIS_MOVIE', fetchThisMovie);
+    yield takeEvery('ADD_MOVIE_SAGA', addMovieSaga);
 }
 
 function* fetchAllMovies() {
