@@ -3,11 +3,14 @@ import './App.css';
 import AddMovie from '../AddMovie/AddMovie';
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
+import { Typography } from '@material-ui/core';
 
 function App() {
     return (
         <div className="App">
-        <h1>The Movies Saga!</h1>
+        <Typography color="primary">
+            <h1>The Movies Saga!</h1>
+        </Typography>
         <Router>
             <Route path="/addMovie">
                 <AddMovie/>

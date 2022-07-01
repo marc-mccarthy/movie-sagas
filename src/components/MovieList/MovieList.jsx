@@ -23,7 +23,7 @@ function MovieList() {
 
     return (
         <main>
-            <Button variant="contained" color="primary" onClick={addMoviePage}>Add Movie</Button>
+            <Button variant="contained" color="secondary" onClick={addMoviePage}>Add Movie</Button>
             <Box mt={2}>
                 <Grid container justify="space-around" spacing={2}>
                     {movies.map(movie  => (<MovieItem key={movie.id} movie={movie}/>))}

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./AddMovie.css";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Grid, TextField, Button } from "@material-ui/core";
-import { FormControl, Chip, Autocomplete, Stack } from "@mui/material";
+import { Grid, TextField, Button, Typography } from "@material-ui/core";
+import { Box, FormControl, Chip, Autocomplete, Stack, TextareaAutosize } from "@mui/material";
 import Select from 'react-select';
 
 function AddMovie() {
@@ -11,9 +11,9 @@ function AddMovie() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const [title, setTitle] = useState("");
-    const [poster, setPoster] = useState("");
-    const [description, setDescription] = useState("");
+    const [title, setTitle] = useState("Tropic Thunder");
+    const [poster, setPoster] = useState("images/tropic-thunder.jpg");
+    const [description, setDescription] = useState("Funniest movie of all time!");
     const [genres, setGenres] = useState([]);
 
     const addMoviePage = () => {
@@ -47,28 +47,78 @@ function AddMovie() {
         { label: 'Science Fiction', value: 11 },
         { label: 'Space Opera', value: 12 },
         { label: 'Superhero', value: 13 },
-    ]
+    ];
 
     return (
         <div>
-            <h2>Add New Movie</h2>
-            <Stack direction="row" spacing={3}>
-                <TextField required id="movie-title" onChange={changeTitle} label="Title" placeholder="Tropic Thunder" variant="standard"/>
-                <TextField required id="movie-image-url" onChange={changeImageUrl} label="Image Url" placeholder="/images/tropic-thunder.jpg" variant="standard" />
-                <TextField required id="movie-description" onChange={changeDescription} label="Description" placeholder="Funniest movie of all time!" variant="standard" />
-                <Select
-                    closeMenurOnSelect={false}
-                    isMulti
-                    options={genresArray}
-                    onChange={(selected) => setGenres(selected)}
-                    getOptionLabel={(genres) => genres.label}
-                    placeholder="Select Genres"
-                />
-            </Stack>
-            <Stack direction="row" mt={3} spacing={3} sx={{ width: 300 }}>
-                <Button variant="outlined" color="secondary" onClick={() => history.push('/')}>Cancel</Button>
-                <Button variant="contained" color="primary" onClick={addMoviePage}>Save</Button>
-            </Stack>
+            <Typography color="primary">
+                <h2>Add New Movie</h2>
+            </Typography>
+
+            <Box
+                component="form"
+                sx={{'& .MuiTextField-root': { m: 4, width: '30ch' },}}
+                noValidate
+                autoComplete="off"
+                align="center"
+            >
+                <Stack direction="row" mt={5} spacing={3} sx={{ width: 1000 }}>
+                    <TextField
+                        required id="movie-title"
+                        onChange={changeTitle}
+                        label="Title"
+                        defaultValue={title}
+                        placeholder="Tropic Thunder"
+                        variant="standard"
+                    />
+                    <TextField
+                        required id="movie-image-url"
+                        onChange={changeImageUrl}
+                        label="Image Url"
+                        defaultValue="images/tropic-thunder.jpg"
+                        placeholder="images/tropic-thunder.jpg"
+                        variant="standard"
+                    />
+                    <Select
+                        required id="movie-genres"
+                        closeMenurOnSelect={false}
+                        isMulti
+                        options={genresArray}
+                        onChange={(selected) => setGenres(selected)}
+                        getOptionLabel={(genres) => genres.label}
+                        placeholder="Select Genres"
+                    />
+                </Stack>
+
+                <Stack spacing={2}>
+                    <TextareaAutosize
+                        required id="movie-description"
+                        minRows={5}
+                        maxRows={10}
+                        onChange={changeDescription}
+                        aria-label="Description"
+                        defaultValue="Funniest movie of all time!"
+                        placeholder="Funniest movie of all time!"
+                        style={{ width: 500 }}
+                    />
+                </Stack>
+
+                <Stack direction="row" mt={5} spacing={3} sx={{ width: 1000 }}>
+                    <Button
+                        variant="outlined"
+                        color="secondary"
+                        onClick={() => history.push('/')}>
+                        Cancel
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={addMoviePage}>
+                        Save
+                    </Button>
+                </Stack>
+
+            </Box>
         </div>
     );
 }
