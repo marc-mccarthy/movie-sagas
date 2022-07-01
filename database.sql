@@ -73,3 +73,6 @@ VALUES
 (12,8), (12,9),           -- Social Net
 (13,4), (13,10), (13,6),  -- Titanic
 (14,3), (14,2), (14,4);   -- Toy Story
+
+-- Get Call for 'THIS_MOVIE' with all the Genres joined
+SELECT * FROM movies JOIN movies_genres ON movies.id = movies_genres.movie_id JOIN genres ON movies_genres.genre_id = genres.id WHERE movie_id=1;

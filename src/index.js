@@ -10,6 +10,8 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from './theme';
 
 // Create the rootSaga generator function
 function* rootSaga() {
@@ -31,9 +33,9 @@ function* fetchAllMovies() {
 function* fetchThisMovie(action) {
     // get this movie from the DB
     try {
-        console.log(`Get this movie with ID #: ${action.payload}`);
+        console.log(`Get this movie with ID #: ${action.payload}`)
         const movie = yield axios.get(`/api/movie/details?id=${action.payload}`);
-        yield put({type: 'SET_MOVIE', payload: movie.data});
+        yield put({type: 'SET_MOVIE', payload: movie.data})
     } catch {
         console.log('get all error');
     }
@@ -63,7 +65,7 @@ const genres = (state = [], action) => {
 }
 
 // Used to store the clicked movie
-const thisMovie = (state = [], action) => {
+const thisMovie = (state = [''], action) => {
     switch (action.type) {
         case 'SET_MOVIE':
             return action.payload;
@@ -89,7 +91,9 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={storeInstance}>
-        <App />
+            <ThemeProvider theme={theme}>
+                <App />
+            </ThemeProvider>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
