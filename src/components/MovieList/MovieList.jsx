@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Button, Box, Grid, Typography } from '@material-ui/core';
-import { styled } from '@mui/material/styles';
-import { Paper } from '@mui/material';
-import './MovieList.css'
+import { Button, Grid } from '@material-ui/core';
+import { Box, Paper, styled, Typography } from '@mui/material';
 import MovieItem from '../MovieItem/MovieItem';
 
 function MovieList() {
@@ -24,7 +22,7 @@ function MovieList() {
     return (
         <main>
             <Button variant="contained" color="secondary" onClick={addMoviePage}>Add Movie</Button>
-            <Box mt={2}>
+            <Box mt={4}>
                 <Grid container justify="space-around" spacing={2}>
                     {movies.map(movie  => (<MovieItem key={movie.id} movie={movie}/>))}
                 </Grid>
