@@ -11,7 +11,7 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 import { ThemeProvider } from '@material-ui/core/styles'
-import theme from './theme';
+import theme from './materialui/theme';
 
 // Create the rootSaga generator function
 function* rootSaga() {
