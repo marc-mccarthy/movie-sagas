@@ -12,7 +12,7 @@ function Details(props) {
     const history = useHistory();
 
     useEffect(() => {
-        dispatch({ type: 'THIS_MOVIE', payload: id });
+        dispatch({ type: 'THIS_MOVIE_SAGA', payload: id });
     }, []);
 
     const movie = useSelector(store => store.thisMovie)

@@ -23,7 +23,7 @@ router.get('/details', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/add', (req, res) => {
     console.log(req.body);
     // RETURNING "id" will give us back the id of the created movie
     const insertMovieQuery = `INSERT INTO "movies" ("title", "poster", "description") VALUES ($1, $2, $3) RETURNING "id";`
@@ -48,5 +48,34 @@ router.post('/', (req, res) => {
         res.sendStatus(500);
     })
 })
+
+router.put('/like', (req, res) => {
+    console.log( req.query.id);
+    const queryString = `UPDATE "movies" SET "likes" = "likes" + 1 WHERE "id" = $1;`;
+    pool.query(queryString, [req.query.id]).then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log(`ERROR: Like Movie: ${error}`);
+        res.sendStatus(500);
+    })
+})
+
+router.delete('/delete', (req, res) => {
+    console.log(req.query.id);
+    const queryGenresString = `DELETE FROM "movies_genres" WHERE "movie_id" = $1;`;
+    pool.query(queryGenresString, [req.query.id]).then(result => {
+        const queryString = `DELETE FROM "movies" WHERE "id" = $1;`;
+        pool.query(queryString, [ req.query.id ]).then(result => {
+            res.sendStatus(200);
+        }).catch(error => {
+            console.log(`ERROR: Delete Movie: ${error}`);
+            res.sendStatus(500);
+        })
+    }).catch( error => {
+        console.log(`ERROR: Delete Movie: ${error}`);
+        res.sendStatus(500);
+    })
+})
+
 
 module.exports = router;

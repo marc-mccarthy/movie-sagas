@@ -1,11 +1,11 @@
 import { HashRouter as Router, Route } from 'react-router-dom';
+import { Typography } from '@material-ui/core';
 import './App.css';
 import AddMovie from '../AddMovie/AddMovie';
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
-import { Typography } from '@material-ui/core';
 
-function App() {
+function App(props) {
     return (
         <div className="App">
         <Typography color="primary">

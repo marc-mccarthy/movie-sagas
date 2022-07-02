@@ -15,19 +15,20 @@ import theme from './theme';
 
 // Create the rootSaga generator function
 function* rootSaga() {
-    yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-    yield takeEvery('THIS_MOVIE', fetchThisMovie);
-    yield takeEvery('ADD_MOVIE_SAGA', addMovie);
+    yield takeEvery( 'FETCH_MOVIES_SAGA', fetchAllMovies );
+    yield takeEvery( 'THIS_MOVIE_SAGA', fetchThisMovie );
+    yield takeEvery( 'ADD_MOVIE_SAGA', addMovie );
+    yield takeEvery( 'LIKE_MOVIE_SAGA', likeMovie );
+    yield takeEvery( 'DELETE_MOVIE_SAGA', deleteMovie );
 }
 
 function* fetchAllMovies() {
     // get all movies from the DB
     try {
         const movies = yield axios.get('/api/movie');
-        console.log(`Get all these movies: ${movies.data}`);
         yield put({ type: 'SET_MOVIES', payload: movies.data });
     } catch {
-        console.log('get all error');
+        console.log('Get All Movies: Generator Error');
     }
 }
 
@@ -38,7 +39,7 @@ function* fetchThisMovie(action) {
         const movie = yield axios.get(`/api/movie/details?id=${action.payload}`);
         yield put({type: 'SET_MOVIE', payload: movie.data})
     } catch {
-        console.log('get all error');
+        console.log('Get This Movie: Generator Error');
     }
 }
 
@@ -46,10 +47,32 @@ function* addMovie(action) {
     // add a movie to the DB
     try {
         console.log(`Add this movie: ${action.payload}`)
-        yield axios.post('/api/movie', action.payload);
-        yield put({type: 'FETCH_MOVIES'});
+        yield axios.post('/api/movie/add', action.payload);
+        yield put({type: 'FETCH_MOVIES_SAGA'});
     } catch {
-        console.log('add error');
+        console.log('Add Movie: Generator Error');
+    }
+}
+
+function* likeMovie(action) {
+    // like this movie in the DB
+    try {
+        console.log(`Like this movie: ${action.payload}`)
+        yield axios.put(`/api/movie/like?id=${action.payload}`);
+        yield put({type: 'LIKE_MOVIE'});
+    } catch {
+        console.log('Like Movie: Generator Error');
+    }
+}
+
+function* deleteMovie(action) {
+    // delete this movie from the DB
+    try {
+        console.log(`Delete this movie: ${action.payload}`)
+        yield axios.delete(`/api/movie/delete?id=${action.payload}`);
+        yield put({type: 'FETCH_MOVIES_SAGA'});
+    } catch {
+        console.log('Delete Movie: Generator Error');
     }
 }
 

@@ -1,48 +1,34 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-import { Box, Card, CardActions, CardContent, CardMedia, Grid, Paper, styled } from '@mui/material';
-import Typography from '@mui/material/Typography';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Button, Typography } from '@material-ui/core';
+import { Box, Card, CardActionArea, CardActions, CardContent, CardMedia, Divider, Grid, Paper, Stack, styled } from '@mui/material';
 import './MovieItem.css'
 
-function MovieItem(props) {
+function MovieItem( props ) {
 
-    // const dispatch = useDispatch();
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const showDetails = () => {
-        // dispatch({ type: 'THIS_MOVIE', payload: props.movie.id });
-        history.push(`/details/${props.movie.id}`)
+        history.push( `/details/${props.movie.id}` )
     }
 
-    const Item = styled(Paper)(({ theme }) => ({
+    const likeMovie = () => {
+        dispatch( { type: 'LIKE_MOVIE_SAGA', payload: props.movie.id } );
+    }
+
+    const deleteMovie = () => {
+        dispatch( { type: 'DELETE_MOVIE_SAGA', payload: props.movie.id } );
+    }
+
+    const Item = styled( Paper )( ( { theme } ) => ( {
         backgroundColor: theme.palette.mode === 'light' ? '#1A2027' : '#fff',
         ...theme.typography.body2,
-        padding: theme.spacing(.5),
+        padding: theme.spacing( 0 ),
         textAlign: 'center',
         color: theme.palette.text.primary,
-    }));
-
-    const card = (
-        <Button color="primary" onClick={showDetails}>
-            <React.Fragment>
-                <CardContent color="primary">
-                    <Typography mb={1} variant="p" component="div">
-                        {props.movie.title}
-                    </Typography>
-                    <CardMedia
-                        component="img"
-                        image={props.movie.poster}
-                        alt={props.movie.title}
-                    />
-                    <CardActions>
-                        <Button variant="contained" size="medium">Like</Button>
-                        <Button variant="outlined" size="medium">Delete</Button>
-                    </CardActions>
-                </CardContent>
-            </React.Fragment>
-        </Button>
-    );
+    } ) );
 
     return (
         <Grid item>
@@ -50,8 +36,48 @@ function MovieItem(props) {
                 <Card
                     align="center"
                     justify="center"
-                    sx={{ width: 300, height: 400}}>
-                    {card}
+                    sx={{ width: 250, height: 450 }}
+                >
+                    <CardActionArea
+                        onClick={showDetails}>
+                        <CardMedia
+                            component="img"
+                            height="350"
+                            image={props.movie.poster}
+                            alt={props.movie.title}
+                        />
+                    </CardActionArea>
+                    <CardContent>
+                        <Typography color="primary">
+                            {props.movie.title}
+                        </Typography>
+                    </CardContent>
+                    <CardActions m={0}>
+                        <Stack
+                            direction="row"
+                            divider={<Divider orientation="vertical" flexItem />}
+                            spacing={2}
+                        >
+                            <Item>
+                                <Button
+                                    onClick={likeMovie}
+                                    size="small"
+                                    variant="contained"
+                                    color="primary">
+                                    Like
+                                </Button>
+                            </Item>
+                            <Item>
+                                <Button
+                                    onClick={deleteMovie}
+                                    size="small"
+                                    variant="outlined"
+                                    color="secondary">
+                                    Delete
+                                </Button>
+                            </Item>
+                        </Stack>
+                    </CardActions>
                 </Card>
             </Item>
         </Grid>
