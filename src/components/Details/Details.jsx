@@ -4,6 +4,7 @@ import {useParams, useHistory} from 'react-router-dom';
 import Genres from '../Genres/Genres';
 import './Details.css'
 import Button from '@material-ui/core/Button';
+import loadingGif from '../../images/loading.gif';
 
 function Details(props) {
 
@@ -23,7 +24,7 @@ function Details(props) {
 
     return (
         <div>
-            {movie.length === 0 ? (<p>Loading...</p>) : (
+            {movie.length === 0 ? (<img src={loadingGif}/>) : (
                 <div>
                     <h2>{movie[0].title}</h2>
                     <ul>

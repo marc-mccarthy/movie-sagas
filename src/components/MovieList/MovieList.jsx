@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Button, Grid, Typography } from '@material-ui/core';
 import { Box, Paper, styled } from '@mui/material';
 import MovieItem from '../MovieItem/MovieItem';
+import loadingGif from '../../images/loading.gif';
 
 function MovieList(props) {
 
@@ -20,14 +21,30 @@ function MovieList(props) {
     }
 
     return (
-        <main>
-            <Button variant="contained" color="secondary" onClick={addMoviePage}>Add Movie</Button>
-            <Box mt={4}>
-                <Grid container wrap="wrap" justify="space-around" spacing={4}>
-                    {movies.map(movie  => (<MovieItem key={movie.id} movie={movie}/>))}
-                </Grid>
-            </Box>
-        </main>
+        <div>
+            { movies.length === 0 ? (<img src={ loadingGif } />) : (
+                <main>
+                    <Button
+                        onClick={ addMoviePage }
+                        variant="contained"
+                        color="secondary">
+                        Add Movie
+                    </Button>
+                    <Box
+                        mt={4}
+                    >
+                        <Grid
+                            container
+                            display="flex"
+                            wrap="wrap"
+                            justify="center"
+                            spacing={4}>
+                            {movies.map(movie  => (<MovieItem key={movie.id} movie={movie}/>))}
+                        </Grid>
+                    </Box>
+                </main>
+            )}
+        </div>
     );
 }
 
