@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Button, Typography } from '@material-ui/core';
 import { Box, Card, CardActionArea, CardActions, CardContent, CardMedia, Divider, Grid, Paper, Stack, styled } from '@mui/material';
+import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 import './MovieItem.css'
 
 function MovieItem( props ) {
@@ -11,28 +12,28 @@ function MovieItem( props ) {
     const dispatch = useDispatch();
 
     const showDetails = () => {
-        history.push( `/details/${props.movie.id}` )
+        history.push(`/details/${props.movie.id}`)
     }
 
     const likeMovie = () => {
-        dispatch( { type: 'LIKE_MOVIE_SAGA', payload: props.movie.id } );
+        dispatch({ type: 'LIKE_MOVIE_SAGA', payload: props.movie.id });
     }
 
     const deleteMovie = () => {
-        dispatch( { type: 'DELETE_MOVIE_SAGA', payload: props.movie.id } );
+        dispatch({ type: 'DELETE_MOVIE_SAGA', payload: props.movie.id });
     }
 
-    const Item = styled( Paper )( ( { theme } ) => ( {
+    const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'light' ? '#1A2027' : '#fff',
         ...theme.typography.body2,
-        padding: theme.spacing( 0 ),
+        padding: theme.spacing(0),
         textAlign: 'center',
         color: theme.palette.text.primary,
-    } ) );
+    }));
 
     return (
         <Grid item>
-            <Item>
+            <Item >
                 <Card
                     align="center"
                     justify="center"

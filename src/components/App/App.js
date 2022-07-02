@@ -2,6 +2,7 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import './App.css';
 import AddMovie from '../AddMovie/AddMovie';
+import EditMovie from '../EditMovie/EditMovie';
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
 
@@ -14,6 +15,9 @@ function App(props) {
         <Router>
             <Route path="/addMovie">
                 <AddMovie/>
+            </Route>
+            <Route path="/editMovie">
+                <EditMovie />
             </Route>
             <Route path="/" exact>
                 <MovieList />
