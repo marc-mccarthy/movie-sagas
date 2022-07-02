@@ -5,6 +5,7 @@ import AddMovie from '../AddMovie/AddMovie';
 import EditMovie from '../EditMovie/EditMovie';
 import MovieList from '../MovieList/MovieList';
 import Details from '../Details/Details';
+import Top10Movies from '../Top10Movies/Top10Movies';
 
 function App(props) {
     return (
@@ -25,6 +26,9 @@ function App(props) {
             <Route path="/details/:id">
                 <Details />
             </Route>
+                <Route path="/top10Movies">
+                    <Top10Movies />
+                </Route>
         </Router>
         </div>
     );

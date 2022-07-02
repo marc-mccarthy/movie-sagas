@@ -53,7 +53,7 @@ function MovieItem( props ) {
                             {props.movie.title}
                         </Typography>
                     </CardContent>
-                    <CardActions m={0}>
+                    <CardActions>
                         <Stack
                             direction="row"
                             divider={<Divider orientation="vertical" flexItem />}

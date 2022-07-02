@@ -23,6 +23,15 @@ router.get('/details', (req, res) => {
     })
 })
 
+router.get('/top10Movies', (req, res) => {
+    const query = `SELECT * FROM "movies" ORDER BY "likes" DESC LIMIT 10;`
+    pool.query(query).then(result => {
+        res.send(result.rows)
+    }).catch(result => {
+        console.log(`ERROR: Get this movie: ${error}`)
+    })
+})
+
 router.post('/add', (req, res) => {
     console.log(req.body);
     // RETURNING "id" will give us back the id of the created movie
@@ -51,8 +60,8 @@ router.post('/add', (req, res) => {
 
 router.put('/like', (req, res) => {
     console.log( req.query.id);
-    const queryString = `UPDATE "movies" SET "likes" = "likes" + 1 WHERE "id" = $1;`;
-    pool.query(queryString, [req.query.id]).then(result => {
+    const query = `UPDATE "movies" SET "likes" = "likes" + 1 WHERE "id" = $1;`;
+    pool.query(query, [req.query.id]).then(result => {
         res.sendStatus(200);
     }).catch(error => {
         console.log(`ERROR: Like Movie: ${error}`);
@@ -62,10 +71,10 @@ router.put('/like', (req, res) => {
 
 router.delete('/delete', (req, res) => {
     console.log(req.query.id);
-    const queryGenresString = `DELETE FROM "movies_genres" WHERE "movie_id" = $1;`;
-    pool.query(queryGenresString, [req.query.id]).then(result => {
-        const queryString = `DELETE FROM "movies" WHERE "id" = $1;`;
-        pool.query(queryString, [ req.query.id ]).then(result => {
+    const queryGenres = `DELETE FROM "movies_genres" WHERE "movie_id" = $1;`;
+    pool.query(queryGenres, [req.query.id]).then(result => {
+        const query = `DELETE FROM "movies" WHERE "id" = $1;`;
+        pool.query(query, [ req.query.id ]).then(result => {
             res.sendStatus(200);
         }).catch(error => {
             console.log(`ERROR: Delete Movie: ${error}`);
@@ -76,6 +85,5 @@ router.delete('/delete', (req, res) => {
         res.sendStatus(500);
     })
 })
-
 
 module.exports = router;

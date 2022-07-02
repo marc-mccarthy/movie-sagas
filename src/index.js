@@ -20,6 +20,7 @@ function* rootSaga() {
     yield takeEvery( 'ADD_MOVIE_SAGA', addMovie );
     yield takeEvery( 'LIKE_MOVIE_SAGA', likeMovie );
     yield takeEvery( 'DELETE_MOVIE_SAGA', deleteMovie );
+    yield takeEvery( 'FETCH_TOP10_MOVIES_SAGA', fetchTop10Movies)
 }
 
 function* fetchAllMovies() {
@@ -37,7 +38,7 @@ function* fetchThisMovie(action) {
     try {
         console.log(`Get this movie with ID #: ${action.payload}`)
         const movie = yield axios.get(`/api/movie/details?id=${action.payload}`);
-        yield put({type: 'SET_MOVIE', payload: movie.data})
+        yield put({ type: 'SET_MOVIE', payload: movie.data })
     } catch {
         console.log('Get This Movie: Generator Error');
     }
@@ -48,7 +49,7 @@ function* addMovie(action) {
     try {
         console.log(`Add this movie: ${action.payload}`)
         yield axios.post('/api/movie/add', action.payload);
-        yield put({type: 'FETCH_MOVIES_SAGA'});
+        yield put({ type: 'FETCH_MOVIES_SAGA' });
     } catch {
         console.log('Add Movie: Generator Error');
     }
@@ -59,7 +60,7 @@ function* likeMovie(action) {
     try {
         console.log(`Like this movie: ${action.payload}`)
         yield axios.put(`/api/movie/like?id=${action.payload}`);
-        yield put({type: 'LIKE_MOVIE'});
+        yield put({ type: 'LIKE_MOVIE' });
     } catch {
         console.log('Like Movie: Generator Error');
     }
@@ -70,9 +71,19 @@ function* deleteMovie(action) {
     try {
         console.log(`Delete this movie: ${action.payload}`)
         yield axios.delete(`/api/movie/delete?id=${action.payload}`);
-        yield put({type: 'FETCH_MOVIES_SAGA'});
+        yield put({ type: 'FETCH_MOVIES_SAGA' });
     } catch {
         console.log('Delete Movie: Generator Error');
+    }
+}
+
+function* fetchTop10Movies() {
+    try {
+        console.log('Fetching Top 10 Movies List');
+        const top10Movies = yield axios.get('/api/movie/top10Movies');
+        yield ({ type: 'SET_TOP10_MOVIES', payload: top10Movies.data })
+    } catch {
+        console.log('Get Top 10 Movies: Generator Error');
     }
 }
 
@@ -100,9 +111,19 @@ const genres = (state = [], action) => {
 }
 
 // Used to store the clicked movie
-const thisMovie = (state = [''], action) => {
+const thisMovie = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIE':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+// Used to store the clicked movie
+const top10Movies = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_TOP10_MOVIES':
             return action.payload;
         default:
             return state;
@@ -115,6 +136,7 @@ const storeInstance = createStore(
         movies,
         genres,
         thisMovie,
+        top10Movies,
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

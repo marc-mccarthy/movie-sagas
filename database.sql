@@ -3,7 +3,8 @@ CREATE TABLE "movies" (
     "id" SERIAL PRIMARY KEY,
     "title" VARCHAR(120) NOT NULL,
     "poster"  VARCHAR(120) NOT NULL,
-    "description" TEXT NOT NULL
+    "description" TEXT NOT NULL,
+    "likes" INTEGER DEFAULT 0
 );
 
 CREATE TABLE "genres" (
@@ -27,7 +28,7 @@ VALUES
 
 ('2040', 'images/2040.jpg', 'Concerned about his young daughter''s future, filmmaker Damon Gameau travels the world in search of new approaches and solutions to climate change. He meets with innovators and changemakers in many fields to draw on their expertise.'),
 
-('Avatar', 'images/avatar.jpeg', 'On the lush alien world of Pandora live the Na''vi, beings who appear primitive but are highly evolved. Because the planet''s environment is poisonous, human/Na''vi hybrids, called Avatars, must link to human minds to allow for free movement on Pandora. Jake Sully (Sam Worthington), a paralyzed former Marine, becomes mobile again through one such Avatar and falls in love with a Na''vi woman (Zoe Saldana). As a bond with her grows, he is drawn into a battle for the survival of her world.'),
+('Avatar', 'images/avatar.jpg', 'On the lush alien world of Pandora live the Na''vi, beings who appear primitive but are highly evolved. Because the planet''s environment is poisonous, human/Na''vi hybrids, called Avatars, must link to human minds to allow for free movement on Pandora. Jake Sully (Sam Worthington), a paralyzed former Marine, becomes mobile again through one such Avatar and falls in love with a Na''vi woman (Zoe Saldana). As a bond with her grows, he is drawn into a battle for the survival of her world.'),
 
 ('Before The Flood', 'images/before-the-flood.jpg', 'Using his celebrity status to draw attention to the problem of global warming, one of the most important and pressing issues of our time, actor and United Nations Messenger of Peace, Leonardo DiCaprio, travels the globe to witness firsthand the effects of an impending environmental disaster. By visiting ancient melting glaciers and levelled Indonesian tropical forests, DiCaprio unearths an urgent situation and the world''s dependence on fossil fuels, going as far as to visit President Obama himself for an in-depth interview. But, can this crusade inspire the climate-change deniers?'),
 
@@ -37,8 +38,7 @@ VALUES
 
 ('Django Unchained', 'images/django-unchained.jpg', 'Two years before the Civil War, Django (Jamie Foxx), a slave, finds himself accompanying an unorthodox German bounty hunter named Dr. King Schultz (Christoph Waltz) on a mission to capture the vicious Brittle brothers. Their mission successful, Schultz frees Django, and together they hunt the South''s most-wanted criminals. Their travels take them to the infamous plantation of shady Calvin Candie (Leonardo DiCaprio), where Django''s long-lost wife (Kerry Washington) is still a slave.'),
 
-('Don''t Look Up', 'images/dont-look-up.jpg', '
-Kate Dibiasky (Jennifer Lawrence), an astronomy grad student, and her professor Dr. Randall Mindy (Leonardo DiCaprio) make an astounding discovery of a comet orbiting within the solar system. The problem - it''s on a direct collision course with Earth. The other problem? No one really seems to care. Turns out warning mankind about a planet-killer the size of Mount Everest is an inconvenient fact to navigate. With the help of Dr. Oglethorpe (Rob Morgan), Kate and Randall embark on a media tour that takes them from the office of an indifferent President Orlean (Meryl Streep) and her sycophantic son and Chief of Staff, Jason (Jonah Hill), to the airwaves of The Daily Rip, an upbeat morning show hosted by Brie (Cate Blanchett) and Jack (Tyler Perry). With only six months until the comet makes impact, managing the 24-hour news cycle and gaining the attention of the social media obsessed public before it''s too late proves shockingly comical - what will it take to get the world to just look up?.'),
+('Don''t Look Up', 'images/dont-look-up.jpg', 'Kate Dibiasky (Jennifer Lawrence), an astronomy grad student, and her professor Dr. Randall Mindy (Leonardo DiCaprio) make an astounding discovery of a comet orbiting within the solar system. The problem - it''s on a direct collision course with Earth. The other problem? No one really seems to care. Turns out warning mankind about a planet-killer the size of Mount Everest is an inconvenient fact to navigate. With the help of Dr. Oglethorpe (Rob Morgan), Kate and Randall embark on a media tour that takes them from the office of an indifferent President Orlean (Meryl Streep) and her sycophantic son and Chief of Staff, Jason (Jonah Hill), to the airwaves of The Daily Rip, an upbeat morning show hosted by Brie (Cate Blanchett) and Jack (Tyler Perry). With only six months until the comet makes impact, managing the 24-hour news cycle and gaining the attention of the social media obsessed public before it''s too late proves shockingly comical - what will it take to get the world to just look up?.'),
 
 ('Drive', 'images/drive.jpg', 'Driver is a skilled Hollywood stuntman who moonlights as a getaway driver for criminals. Though he projects an icy exterior, lately he''s been warming up to a pretty neighbor named Irene and her young son, Benicio. When Irene''s husband gets out of jail, he enlists Driver''s help in a million-dollar heist. The job goes horribly wrong, and Driver must risk his life to protect Irene and Benicio from the vengeful masterminds behind the robbery.'),
 
@@ -88,7 +88,7 @@ Kate Dibiasky (Jennifer Lawrence), an astronomy grad student, and her professor 
 
 ('The Bubble', 'images/the-bubble.jpg', 'Sneaking out. Hooking up. Melting down. The cast and crew of a blockbuster action franchise attempt to shoot a sequel while quarantining at a posh hotel.'),
 
-('The Dark Knight', 'images/the-dark-knight', 'With the help of allies Lt. Jim Gordon (Gary Oldman) and DA Harvey Dent (Aaron Eckhart), Batman (Christian Bale) has been able to keep a tight lid on crime in Gotham City. But when a vile young criminal calling himself the Joker (Heath Ledger) suddenly throws the town into chaos, the caped Crusader begins to tread a fine line between heroism and vigilantism.'),
+('The Dark Knight', 'images/the-dark-knight.jpg', 'With the help of allies Lt. Jim Gordon (Gary Oldman) and DA Harvey Dent (Aaron Eckhart), Batman (Christian Bale) has been able to keep a tight lid on crime in Gotham City. But when a vile young criminal calling himself the Joker (Heath Ledger) suddenly throws the town into chaos, the caped Crusader begins to tread a fine line between heroism and vigilantism.'),
 
 ('The Departed', 'images/the-departed.jpg', 'South Boston cop Billy Costigan (Leonardo DiCaprio) goes under cover to infiltrate the organization of gangland chief Frank Costello (Jack Nicholson). As Billy gains the mobster''s trust, a career criminal named Colin Sullivan (Matt Damon) infiltrates the police department and reports on its activities to his syndicate bosses. When both organizations learn they have a mole in their midst, Billy and Colin must figure out each other''s identities to save their own lives.'),
 
@@ -114,9 +114,7 @@ Kate Dibiasky (Jennifer Lawrence), an astronomy grad student, and her professor 
 
 ('White Men Can''t Jump', 'images/white-men-cant-jump.jpg', 'Billy Hoyle (Woody Harrelson) is a white basketball hustler who banks on black players underestimating his skills on the court. When he pulls one over on Sidney Deane (Wesley Snipes), his victim sees a lucrative opportunity, and they become partners in the con game, plying their trade across the courts of Los Angeles. Meanwhile, Billy has to keep one step ahead of mobsters, to whom he owes money, while staying on the good side of his "Jeopardy!"-obsessed, motormouth wife (Rosie Perez).'),
 
-('Zero Days', 'images/zero-days.jpg', 'The malware worm Stuxnet, famously used against Iranian centrifuges, has been claimed by many to have originated as a joint effort between America and Israel.'),
-
-;
+('Zero Days', 'images/zero-days.jpg', 'The malware worm Stuxnet, famously used against Iranian centrifuges, has been claimed by many to have originated as a joint effort between America and Israel.');
 
 -- starter genres
 INSERT INTO "genres" ("name")
@@ -138,20 +136,51 @@ VALUES
 -- starter movies and genres data
 INSERT INTO "movies_genres" ("movie_id", "genre_id")
 VALUES
-(1,1), (1,3), (1,4),      -- Avatar
-(2,1), (2,11), (2,12),    -- Beauty
-(3,3),                    -- Captain Marvel
-(4,4), (4,7),             -- Nemo
-(5,3),                    -- Gone Girl
-(6,12),                   -- Véronique
-(7,9),(7,2),              -- Bond
-(8,4),                    -- Pi
-(9,4),                    -- Monsters
-(10,4),                   -- Star Wars
-(11,6), (11,11),          -- Martian
-(12,8), (12,9),           -- Social Net
-(13,4), (13,10), (13,6),  -- Titanic
-(14,3), (14,2), (14,4);   -- Toy Story
+(1,3), (1, 5), -- 2040
+(2, 1), (2, 7), (2,8), -- Avatar
+(3, 3), (3, 5), -- Before The Flood
+(4, 1), (4, 3), (4, 6), -- Catch Me If You Can
+(5, 1), (5, 9), -- Chitty Chitty Bang Bang
+(6, 5), (6, 6), -- Django Unchained
+(7, 4), (7, 6), (7, 11), (7, 12), -- Don''t Look Up
+(8, 5), (8, 6), (8, 10), -- Drive
+(9, 5), (9, 6), -- End of Watch
+(10, 8), (10, 10), (10, 11), -- Ex-Machina
+(11, 1), (11, 2), --Finding Nemo
+(12, 4), (12, 6), -- Full Metal Jacket
+(13, 5), (13, 6), (13, 8), -- Get Out
+(14, 6), (14, 10), -- Gone Girl
+(15, 1), (15, 5), -- Gran Torino
+(16, 1), (16, 7), (16, 8), -- Inception
+(17, 6), (17, 8), -- Inglourious Basterds
+(18, 1), (18, 7), (18, 8), (18, 11), -- Interstellar
+(19, 5), (19, 6), (19, 13), -- Joker
+(20, 1), (20, 4), -- Knives Out
+(21, 5), (21, 6), -- No Country For Old Men
+(22, 3), (22, 5), -- Our Planet
+(23, 6), (23, 7), -- Parasite
+(24, 1), (24, 8), (24, 11), (24, 12), -- Prometheus
+(25, 2), (25, 6), (25, 7), -- Princess Mononoke
+(26, 1), (26, 2), (26, 4), (26, 8), -- Sausage Party
+(27, 2), (27, 6), (27, 7), -- Spirited Away
+(28, 1), (28, 7), (28, 8), (28, 11), (28, 12), -- Star Wars: The Last Jedi
+(29, 2), (29, 4), -- Team America: World Police
+(30, 4), (30, 5), -- The Big Lebowski
+(31, 4), (31, 6), -- The Bubble
+(32, 1), (32, 6), (32, 8), (32, 13), -- The Dark Knight
+(33, 5), (33, 6), (33, 10), -- The Departed
+(34, 1), (34, 7), (34, 12), -- The Martian
+(35, 3), (35, 6), (35, 12), -- The Master
+(36, 7), (36, 8), (36, 10), (36, 11), -- The Matrix
+(37, 6), (37, 8), -- The Prestige
+(38, 5), (38, 6), -- The Truman Show
+(39, 5), (39, 6), -- There Will Be Blood
+(40, 6), (40, 10), -- To Kill A Mockingbird
+(41, 1), (41, 4), -- Tropic Thunder
+(42, 5), (42, 6), (42, 13), -- V For Vendetta
+(43, 6), (43, 7), -- Warrior
+(44, 4), (44, 6), (44, 10), -- White Men Can''t Jump
+(45, 3), (45, 5); -- Zero Days
 
 SELECT * FROM movies WHERE id=2;
 

@@ -20,6 +20,11 @@ function MovieList(props) {
         history.push('/addMovie');
     }
 
+    const top10Movies = () => {
+        dispatch({type: 'FETCH_TOP10_MOVIES_SAGA'});
+        history.push('/top10');
+    }
+
     return (
         <div>
             { movies.length === 0 ? (<img src={ loadingGif } />) : (
@@ -29,6 +34,12 @@ function MovieList(props) {
                         variant="contained"
                         color="secondary">
                         Add Movie
+                    </Button>
+                    <Button
+                        onClick={ top10Movies }
+                        variant="contained"
+                        color="secondary">
+                        Top 10 Movies
                     </Button>
                     <Box
                         mt={4}
