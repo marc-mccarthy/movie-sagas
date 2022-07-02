@@ -16,7 +16,7 @@ function App(props) {
             <Route path="/addMovie">
                 <AddMovie/>
             </Route>
-            <Route path="/editMovie">
+            <Route path="/editMovie/:id">
                 <EditMovie />
             </Route>
             <Route path="/" exact>

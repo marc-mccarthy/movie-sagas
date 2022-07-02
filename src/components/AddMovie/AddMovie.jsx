@@ -64,6 +64,7 @@ function AddMovie() {
                 <Stack direction="row" mt={5} spacing={3} sx={{ width: 1000 }}>
                     <TextField
                         required id="movie-title"
+                        autoFocus
                         onChange={changeTitle}
                         label="Title"
                         defaultValue={title}

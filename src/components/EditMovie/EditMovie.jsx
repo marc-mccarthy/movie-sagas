@@ -6,26 +6,25 @@ import { Box, FormControl, Chip, Autocomplete, Stack, TextareaAutosize } from "@
 import Select from 'react-select';
 import loadingGif from '../../images/loading.gif';
 
-function EditMovie() {
+function EditMovie(props) {
 
-     const { id } = useParams();
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
+        console.log(id)
         dispatch({ type: 'THIS_MOVIE_SAGA', payload: id });
-        console.log(JSON.stringify('lol'))
     }, []);
 
-    const history = useHistory();
-    const dispatch = useDispatch();
+    const { id } = useParams();
 
+    const movie = useSelector(store => store.thisMovie)
 
-    const movie = useSelector(store => store.movie);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
 
-    const [title, setTitle] = useState("Tropic Thunder");
-    const [description, setDescription] = useState("Funniest movie of all time!");
-
-    const EditMoviePage = () => {
-        dispatch({ type: 'ADD_MOVIE_SAGA', payload: { title: title, poster: poster, description: description, genres: genres } });
+    const editMoviePage = () => {
+        dispatch({ type: 'ADD_MOVIE_SAGA', payload: { title: title, description: description }});
         history.push('/');
     }
 
@@ -55,23 +54,22 @@ function EditMovie() {
                         <Stack direction="row" mt={5} spacing={3} sx={{ width: 1000 }}>
                             <TextField
                                 required id="movie-title"
-                                value={ 'title' }
-                                onChange={changeTitle}
+                                autoFocus
+                                value={ movie[0].title }
+                                onChange={ changeTitle }
                                 label="Title"
-                                defaultValue={title}
                                 variant="standard"
                             />
                         </Stack>
 
-                        <Stack spacing={2}>
+                        <Stack spacing={ 2 }>
                             <TextareaAutosize
                                 required id="movie-description"
-                                value={ 'description' }
-                                minRows={5}
-                                maxRows={10}
-                                onChange={changeDescription}
+                                value={ movie[0].description }
+                                minRows={ 15 }
+                                maxRows={ 20 }
+                                onChange={ changeDescription }
                                 aria-label="Description"
-                                defaultValue="Funniest movie of all time!"
                                 style={{ width: 500 }}
                             />
                         </Stack>
@@ -86,7 +84,7 @@ function EditMovie() {
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={EditMoviePage}>
+                                onClick={ editMoviePage }>
                                 Save
                             </Button>
                         </Stack>

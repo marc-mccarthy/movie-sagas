@@ -14,6 +14,7 @@ function Details(props) {
     const history = useHistory();
 
     useEffect(() => {
+        console.log(id)
         dispatch({ type: 'THIS_MOVIE_SAGA', payload: id });
     }, []);
 
@@ -31,7 +32,7 @@ function Details(props) {
 
     return (
         <div>
-            {movie.length === 0 ? (<img src={loadingGif}/>) : (
+            {movie.length === 0 ? (<img src={ loadingGif }/>) : (
                 <div>
                     <Stack
                         direction="row"
@@ -51,13 +52,13 @@ function Details(props) {
                             Back to Movies List
                         </Button>
                     </Stack>
-                    <h2>{movie[0].title}</h2>
+                    <h2>{ movie[0].title }</h2>
                     <ul>
-                        {movie.map(genre => {return (<Genres genre={genre.name} />)})}
+                        { movie.map(genre => {return (<Genres genre={genre.name} /> )})}
                     </ul>
                     <div className="movieItemContainer">
-                        <img id="movieItemImage" src={movie[0].poster} alt={movie[0].title}/>
-                        <p id="movieItemDescription">{movie[0].description}</p>
+                        <img id="movieItemImage" src={ movie[0].poster } alt={ movie[0].title }/>
+                        <p id="movieItemDescription">{ movie[0].description }</p>
                     </div>
                 </div>
             )}
