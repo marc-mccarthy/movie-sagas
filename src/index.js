@@ -61,8 +61,20 @@ function* likeMovie(action) {
         console.log(`Like this movie: ${action.payload}`)
         yield axios.put(`/api/movie/like?id=${action.payload}`);
         yield put({ type: 'LIKE_MOVIE' });
+        yield put({ type: 'FETCH_MOVIES_SAGA' });
     } catch {
         console.log('Like Movie: Generator Error');
+    }
+}
+
+function* updateMovie(action) {
+    // update this movie in the DB
+    try {
+        console.log(`Update this movie: ${action.payload}`)
+        yield axios.put(`/api/movie/update?id=${action.payload.id}`, action.payload);
+        yield put({ type: 'FETCH_MOVIES_SAGA' });
+    } catch {
+        console.log('Update Movie: Generator Error');
     }
 }
 
@@ -81,7 +93,7 @@ function* fetchTop10Movies() {
     try {
         console.log('Fetching Top 10 Movies List');
         const top10Movies = yield axios.get('/api/movie/top10Movies');
-        yield ({ type: 'SET_TOP10_MOVIES', payload: top10Movies.data })
+        yield put({ type: 'SET_TOP10_MOVIES', payload: top10Movies.data })
     } catch {
         console.log('Get Top 10 Movies: Generator Error');
     }

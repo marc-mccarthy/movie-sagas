@@ -21,7 +21,6 @@ function MovieList(props) {
     }
 
     const top10Movies = () => {
-        dispatch({type: 'FETCH_TOP10_MOVIES_SAGA'});
         history.push('/top10');
     }
 

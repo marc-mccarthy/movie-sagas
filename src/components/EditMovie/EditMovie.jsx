@@ -20,11 +20,11 @@ function EditMovie(props) {
 
     const movie = useSelector(store => store.thisMovie)
 
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+    const [title, setTitle] = useState(movie[0].title);
+    const [description, setDescription] = useState(movie[0].description);
 
     const editMoviePage = () => {
-        dispatch({ type: 'ADD_MOVIE_SAGA', payload: { title: title, description: description }});
+        dispatch({ type: 'UPDATE_MOVIE_SAGA', payload: { id: id, title: title, description: description }});
         history.push('/');
     }
 
@@ -55,7 +55,7 @@ function EditMovie(props) {
                             <TextField
                                 required id="movie-title"
                                 autoFocus
-                                value={ movie[0].title }
+                                value={ title }
                                 onChange={ changeTitle }
                                 label="Title"
                                 variant="standard"
@@ -65,7 +65,7 @@ function EditMovie(props) {
                         <Stack spacing={ 2 }>
                             <TextareaAutosize
                                 required id="movie-description"
-                                value={ movie[0].description }
+                                value={ description }
                                 minRows={ 15 }
                                 maxRows={ 20 }
                                 onChange={ changeDescription }

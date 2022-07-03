@@ -24,18 +24,12 @@ function Top10Movies(props) {
         <div>
             { top10Movies.length === 0 ? (<img src={ loadingGif } />) : (
                 <main>
-                    <Stack
-                        direction="row"
-                        spacing={ 3 }
-                        justifyContent="center"
-                    >
-                        <Button
-                            onClick={ backToMovies }
-                            variant="outlined"
-                            color="secondary">
-                            Back to Movies List
-                        </Button>
-                    </Stack>
+                    <Button
+                        onClick={ backToMovies }
+                        variant="contained"
+                        color="secondary">
+                        Back to Movies List
+                    </Button>
                     <Box
                         mt={ 4 }
                     >

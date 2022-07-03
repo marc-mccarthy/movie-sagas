@@ -65,7 +65,7 @@ function MovieItem( props ) {
                                     size="small"
                                     variant="contained"
                                     color="primary">
-                                    Like
+                                    Likes: {props.movie.likes}
                                 </Button>
                             </Item>
                             <Item>

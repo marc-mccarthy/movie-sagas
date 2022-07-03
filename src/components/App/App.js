@@ -14,19 +14,20 @@ function App(props) {
             <h1>The Movies Saga!</h1>
         </Typography>
         <Router>
+            <Route path="/" exact>
+                <MovieList />
+            </Route>
             <Route path="/addMovie">
                 <AddMovie/>
             </Route>
             <Route path="/editMovie/:id">
                 <EditMovie />
             </Route>
-            <Route path="/" exact>
-                <MovieList />
-            </Route>
+
             <Route path="/details/:id">
                 <Details />
             </Route>
-                <Route path="/top10Movies">
+                <Route path="/top10">
                     <Top10Movies />
                 </Route>
         </Router>
