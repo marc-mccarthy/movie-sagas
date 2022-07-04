@@ -57,14 +57,24 @@ router.post('/add', (req, res) => {
 })
 
 router.put('/update', (req, res) => {
-    console.log(req.body);
-    const query = `UPDATE "movies" SET title = $1, description = $2 WHERE id = $3;`;
-    pool.query(query, [ req.body.title, req.body.description, req.body.id ]).then(result => {
-        res.sendStatus(200);
+    pool.query(`UPDATE "movies" SET title = $1, description = $2 WHERE id = $3;`, [ req.body.title, req.body.description, req.body.id ]).then(result => {
     }).catch(error => {
-        console.log(`ERROR: Update Movie: ${error}`);
+        console.log(`ERROR: Update movie basics error: ${error}`);
         res.sendStatus(500);
     })
+    pool.query(`DELETE FROM "movies_genres" WHERE movie_id = $1;`, [ req.body.id ]).then(result => {
+    }).catch(error => {
+        console.log(`ERROR: Delete movie genres error: ${error}`);
+        res.sendStatus(500);
+    })
+    req.body.genres.forEach(genre => {
+        pool.query(`INSERT INTO "movies_genres" ("movie_id", "genre_id") VALUES ($1, $2);`, [ req.body.id, genre.value ]).then(result => {
+        }).catch(error => {
+            console.log(`ERROR: Update movie genres in Loop: ${error}`);
+            res.sendStatus(500);
+        })
+    })
+    res.sendStatus(200);
 })
 
 router.put('/like', (req, res) => {
@@ -78,7 +88,6 @@ router.put('/like', (req, res) => {
 })
 
 router.delete('/delete', (req, res) => {
-    console.log(req.query.id);
     const queryGenres = `DELETE FROM "movies_genres" WHERE "movie_id" = $1;`;
     pool.query(queryGenres, [req.query.id]).then(result => {
         const query = `DELETE FROM "movies" WHERE "id" = $1;`;

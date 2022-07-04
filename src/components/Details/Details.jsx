@@ -52,13 +52,13 @@ function Details(props) {
                             Back to Movies List
                         </Button>
                     </Stack>
-                    <h2>{ movie[0].title }</h2>
+                    <h2>{ movie.movie.title }</h2>
                     <ul>
-                        { movie.map(genre => {return (<Genres genre={genre.name} /> )})}
+                        { movie.genres.map(genre => {return (<Genres genre={genre.name} /> )})}
                     </ul>
                     <div className="movieItemContainer">
-                        <img id="movieItemImage" src={ movie[0].poster } alt={ movie[0].title }/>
-                        <p id="movieItemDescription">{ movie[0].description }</p>
+                        <img id="movieItemImage" src={ movie.movie.poster } alt={ movie.movie.title }/>
+                        <p id="movieItemDescription">{ movie.movie.description }</p>
                     </div>
                 </div>
             )}

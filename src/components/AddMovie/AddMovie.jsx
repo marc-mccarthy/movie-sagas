@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, TextField, Button, Typography } from "@material-ui/core";
-import { Box, FormControl, Chip, Autocomplete, Stack, TextareaAutosize } from "@mui/material";
+import { TextField, Button, Typography } from "@material-ui/core";
+import { Box, Stack, TextareaAutosize } from "@mui/material";
 import Select from 'react-select';
+import { ContentCutOutlined } from "@mui/icons-material";
 
 function AddMovie() {
 

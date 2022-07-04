@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, Grid, Typography } from '@material-ui/core';
-import { Box, Paper, styled } from '@mui/material';
+import { Box, Paper, Stack, styled } from '@mui/material';
 import MovieItem from '../MovieItem/MovieItem';
 import loadingGif from '../../images/loading.gif';
 
@@ -28,18 +28,24 @@ function MovieList(props) {
         <div>
             { movies.length === 0 ? (<img src={ loadingGif } />) : (
                 <main>
-                    <Button
-                        onClick={ addMoviePage }
-                        variant="contained"
-                        color="secondary">
-                        Add Movie
-                    </Button>
-                    <Button
-                        onClick={ top10Movies }
-                        variant="contained"
-                        color="secondary">
-                        Top 10 Movies
-                    </Button>
+                    <Stack
+                        direction="row"
+                        spacing={ 3 }
+                        justifyContent="center"
+                    >
+                        <Button
+                            onClick={ addMoviePage }
+                            variant="contained"
+                            color="secondary">
+                            Add Movie
+                        </Button>
+                        <Button
+                            onClick={ top10Movies }
+                            variant="contained"
+                            color="secondary">
+                            Top 10 Movies
+                        </Button>
+                    </Stack>
                     <Box
                         mt={4}
                     >

@@ -42,9 +42,10 @@ function* fetchAllGenres() {
         const genresUsable = genres.data.map(genre => {
             return { name: genre.name, value: genre.id }
         })
+        console.log(genresUsable)
         yield put({ type: 'SET_GENRES', payload: genresUsable });
     } catch {
-        console.log('Get All Movies: Generator Error');
+        console.log('Get All Genres: Generator Error');
     }
 }
 
@@ -53,7 +54,10 @@ function* fetchThisMovie(action) {
     try {
         console.log(`Get this movie with ID #: ${action.payload}`)
         const movie = yield axios.get(`/api/movie/details?id=${action.payload}`);
-        yield put({ type: 'SET_MOVIE', payload: movie.data })
+        const movieGenres = movie.data.map(genre => {
+            return { name: genre.name, value: genre.genre_id }
+        })
+        yield put({ type: 'SET_MOVIE', payload: { movie: movie.data[0], genres: movieGenres } });
     } catch {
         console.log('Get This Movie: Generator Error');
     }

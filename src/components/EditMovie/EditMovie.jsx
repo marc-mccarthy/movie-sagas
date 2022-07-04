@@ -13,22 +13,26 @@ function EditMovie(props) {
 
     useEffect(() => {
         dispatch({ type: 'THIS_MOVIE_SAGA', payload: id });
+        dispatch({ type: 'FETCH_GENRES_SAGA' });
     }, []);
 
     const { id } = useParams();
 
     const movie = useSelector(store => store.thisMovie)
+    const genres = useSelector(store => store.genres);
 
-    const [title, setTitle] = useState(movie[0].title);
-    const [description, setDescription] = useState(movie[0].description);
+    const [ title, setTitle ] = useState(movie.movie.title);
+    const [ description, setDescription ] = useState(movie.movie.description);
+    const [ genresSelected, setGenresSelected ] = useState(movie.genres);
 
     const editMoviePage = () => {
-        dispatch({ type: 'UPDATE_MOVIE_SAGA', payload: { id: id, title: title, description: description }});
+        dispatch({ type: 'UPDATE_MOVIE_SAGA', payload: { id: id, title: title, description: description, genres: genresSelected } });
         history.push('/');
     }
 
     const changeTitle = (event) => {
         setTitle(event.target.value);
+        console.log(genresSelected)
     }
 
     const changeDescription = (event) => {
@@ -37,7 +41,7 @@ function EditMovie(props) {
 
     return (
         <div>
-            { movie.length === 0 ? (<img src={ loadingGif } />) : (
+            { movie.length === 0 || genres.length === 0 ? (<img src={ loadingGif } />) : (
                 <div>
                     <Typography color="primary">
                         <h2>Edit Movie</h2>
@@ -58,6 +62,16 @@ function EditMovie(props) {
                                 onChange={ changeTitle }
                                 label="Title"
                                 variant="standard"
+                            />
+                            <Select
+                                required id="movie-genres"
+                                closeMenuOnSelect={ false }
+                                isMulti
+                                defaultValue={ genresSelected }
+                                options={ genres }
+                                onChange={ (selected) => setGenresSelected(selected) }
+                                getOptionLabel={ (genre) => genre.name }
+                                placeholder="Select Genres"
                             />
                         </Stack>
 
