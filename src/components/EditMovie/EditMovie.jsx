@@ -12,7 +12,6 @@ function EditMovie(props) {
     const history = useHistory();
 
     useEffect(() => {
-        console.log(id)
         dispatch({ type: 'THIS_MOVIE_SAGA', payload: id });
     }, []);
 

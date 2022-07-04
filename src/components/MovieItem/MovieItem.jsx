@@ -37,7 +37,7 @@ function MovieItem( props ) {
                 <Card
                     align="center"
                     justify="center"
-                    sx={{ width: 250, height: 450 }}
+                    sx={{ width: 270, maxHeight: 500 }}
                 >
                     <CardActionArea
                         onClick={showDetails}>

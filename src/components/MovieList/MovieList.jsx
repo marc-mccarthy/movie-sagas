@@ -48,7 +48,7 @@ function MovieList(props) {
                             display="flex"
                             wrap="wrap"
                             justify="center"
-                            spacing={4}>
+                            spacing={6}>
                             {movies.map(movie  => (<MovieItem key={movie.id} movie={movie}/>))}
                         </Grid>
                     </Box>

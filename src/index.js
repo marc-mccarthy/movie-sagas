@@ -16,11 +16,13 @@ import theme from './materialui/theme';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery( 'FETCH_MOVIES_SAGA', fetchAllMovies );
+    yield takeEvery( 'FETCH_GENRES_SAGA', fetchAllGenres );
+    yield takeEvery( 'FETCH_TOP10_MOVIES_SAGA', fetchTop10Movies );
     yield takeEvery( 'THIS_MOVIE_SAGA', fetchThisMovie );
     yield takeEvery( 'ADD_MOVIE_SAGA', addMovie );
+    yield takeEvery( 'UPDATE_MOVIE_SAGA', updateMovie );
     yield takeEvery( 'LIKE_MOVIE_SAGA', likeMovie );
     yield takeEvery( 'DELETE_MOVIE_SAGA', deleteMovie );
-    yield takeEvery( 'FETCH_TOP10_MOVIES_SAGA', fetchTop10Movies)
 }
 
 function* fetchAllMovies() {
@@ -28,6 +30,19 @@ function* fetchAllMovies() {
     try {
         const movies = yield axios.get('/api/movie');
         yield put({ type: 'SET_MOVIES', payload: movies.data });
+    } catch {
+        console.log('Get All Movies: Generator Error');
+    }
+}
+
+function* fetchAllGenres() {
+    // get all genres from the DB
+    try {
+        const genres = yield axios.get('/api/genre');
+        const genresUsable = genres.data.map(genre => {
+            return { name: genre.name, value: genre.id }
+        })
+        yield put({ type: 'SET_GENRES', payload: genresUsable });
     } catch {
         console.log('Get All Movies: Generator Error');
     }

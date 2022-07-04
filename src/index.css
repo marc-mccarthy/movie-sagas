@@ -1,4 +1,7 @@
 body {
+    background-image: url('/public/images/wallpaper.jpg');
+
+    background-repeat: repeat;
     margin: 20px;
     padding: 0;
     font-family: sans-serif;

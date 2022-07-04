@@ -1,22 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Grid, TextField, Button, Typography } from "@material-ui/core";
 import { Box, FormControl, Chip, Autocomplete, Stack, TextareaAutosize } from "@mui/material";
 import Select from 'react-select';
 
 function AddMovie() {
 
+    useEffect(() => {
+        dispatch({ type: 'FETCH_GENRES_SAGA' });
+    }, []);
+
     const history = useHistory();
     const dispatch = useDispatch();
+    const genres = useSelector(store => store.genres);
 
     const [title, setTitle] = useState("Tropic Thunder");
     const [poster, setPoster] = useState("images/tropic-thunder.jpg");
     const [description, setDescription] = useState("Funniest movie of all time!");
-    const [genres, setGenres] = useState([]);
+    const [genresSelected, setGenresSelected] = useState([]);
 
     const addMoviePage = () => {
-        dispatch({ type: 'ADD_MOVIE_SAGA', payload: { title: title, poster: poster, description: description, genres: genres } });
+        dispatch({ type: 'ADD_MOVIE_SAGA', payload: { title: title, poster: poster, description: description, genres: genresSelected } });
         history.push('/');
     }
 
@@ -31,22 +36,6 @@ function AddMovie() {
     const changeDescription = (event) => {
         setDescription(event.target.value);
     }
-
-    const genresArray = [
-        { label: 'Adventure', value: 1 },
-        { label: 'Animated', value: 2 },
-        { label: 'Biographical', value: 3 },
-        { label: 'Comedy', value: 4 },
-        { label: 'Disaster', value: 5 },
-        { label: 'Drama', value: 6 },
-        { label: 'Epic', value: 7 },
-        { label: 'Fantasy', value: 8 },
-        { label: 'Musical', value: 9 },
-        { label: 'Romantic', value: 10 },
-        { label: 'Science Fiction', value: 11 },
-        { label: 'Space Opera', value: 12 },
-        { label: 'Superhero', value: 13 },
-    ];
 
     return (
         <div>
@@ -81,11 +70,11 @@ function AddMovie() {
                     />
                     <Select
                         required id="movie-genres"
-                        closeMenurOnSelect={false}
+                        closeMenuOnSelect={false}
                         isMulti
-                        options={genresArray}
-                        onChange={(selected) => setGenres(selected)}
-                        getOptionLabel={(genres) => genres.label}
+                        options={ genres }
+                        onChange={ (selected) => setGenresSelected(selected) }
+                        getOptionLabel={ (genre) => genre.name }
                         placeholder="Select Genres"
                     />
                 </Stack>
