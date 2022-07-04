@@ -44,7 +44,6 @@ router.post('/add', (req, res) => {
         req.body.genres.forEach(genre => {
             const insertGenreQuery = `INSERT INTO "movies_genres" ("movie_id", "genre_id") VALUES ($1, $2);`
             pool.query(insertGenreQuery, [ createdMovieId, genre.value ]).then(result => {
-                res.sendStatus(200);
             }).catch(error => {
                 console.log(`ERROR: Added Genre: ${error}`);
                 res.sendStatus(500);
