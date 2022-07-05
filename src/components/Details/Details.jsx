@@ -42,8 +42,8 @@ function Details(props) {
 							Back to Movies List
 						</Button>
 					</Stack>
-					<Typography  variant="h5">{movie.movie.title}</Typography>
-                    <Stack mt={3} direction="row" justifyContent="center">
+					<Typography variant="h5">{movie.movie.title}</Typography>
+					<Stack mt={3} direction="row" justifyContent="center">
 						<img
 							id="movieItemImage"
 							src={movie.movie.poster}
@@ -53,7 +53,7 @@ function Details(props) {
 							<Typography variant="h5">
 								<ul>
 									{movie.genres.map((genre) => {
-                                        return <li>{genre.name}</li>
+										return <li>{genre.name}</li>;
 									})}
 								</ul>
 							</Typography>

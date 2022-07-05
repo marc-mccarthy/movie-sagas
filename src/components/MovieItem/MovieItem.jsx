@@ -48,13 +48,14 @@ function MovieItem(props) {
 					<Stack
 						direction="row"
 						divider={<Divider orientation="vertical" flexItem />}
-						spacing={7.2}
+						spacing={5.2}
 					>
 						<Button
 							onClick={likeMovie}
 							size="small"
 							variant="outlined"
 							color="primary"
+							style={{ width: 85 }}
 						>
 							Likes: {props.movie.likes}
 						</Button>
@@ -63,6 +64,7 @@ function MovieItem(props) {
 							size="small"
 							variant="outlined"
 							color="secondary"
+							style={{ width: 85 }}
 						>
 							Delete
 						</Button>

@@ -60,7 +60,7 @@ function MovieList(props) {
 						>
 							{genres.map((genre) => (
 								<Grid item key={genre.id}>
-                                    {genre.name}
+									{genre.name}
 								</Grid>
 							))}
 						</Grid>

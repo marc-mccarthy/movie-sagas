@@ -58,7 +58,7 @@ function AddMovie() {
 				<Stack
 					direction="row"
 					justifyContent="center"
-                    alignItems="center"
+					alignItems="center"
 					mt={3}
 					spacing={3}
 				>
