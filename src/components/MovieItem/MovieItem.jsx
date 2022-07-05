@@ -1,32 +1,31 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { Button, Typography } from '@material-ui/core';
-import { Box, Card, CardActionArea, CardActions, CardContent, CardMedia, Divider, Grid, Paper, Stack, styled } from '@mui/material';
-import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
+import {useHistory} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import {Button, Typography} from '@material-ui/core';
+import {Card, CardActionArea, CardActions, CardContent, CardMedia, Divider, Grid, Stack} from '@mui/material';
 import './MovieItem.css'
 
-function MovieItem( props ) {
+function MovieItem(props) {
 
-    const history = useHistory();
-    const dispatch = useDispatch();
+    const history=useHistory();
+    const dispatch=useDispatch();
 
-    const showDetails = () => {
+    const showDetails=() => {
         history.push(`/details/${props.movie.id}`)
     }
 
-    const likeMovie = () => {
-        dispatch({ type: 'LIKE_MOVIE_SAGA', payload: props.movie.id });
+    const likeMovie=() => {
+        dispatch({type: 'LIKE_MOVIE_SAGA', payload: props.movie.id});
     }
 
-    const deleteMovie = () => {
-        dispatch({ type: 'DELETE_MOVIE_SAGA', payload: props.movie.id });
+    const deleteMovie=() => {
+        dispatch({type: 'DELETE_MOVIE_SAGA', payload: props.movie.id});
     }
 
     return (
         <Grid item>
             <Card
-                sx={{ width: 270, maxHeight: 500 }}
+                sx={{width: 270, maxHeight: 500}}
             >
                 <CardActionArea
                     onClick={showDetails}

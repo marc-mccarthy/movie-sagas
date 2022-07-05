@@ -8,31 +8,31 @@ import Details from '../Details/Details';
 import Top10Movies from '../Top10Movies/Top10Movies';
 
 function App(props) {
-    return (
-        <div className="App">
-        <Typography color="primary">
-            <h1>The Movies Saga!</h1>
-        </Typography>
-        <Router>
-            <Route path="/" exact>
-                <MovieList />
-            </Route>
-            <Route path="/addMovie">
-                <AddMovie/>
-            </Route>
-            <Route path="/editMovie/:id">
-                <EditMovie />
-            </Route>
+	return (
+		<div className='App'>
+			<Typography color='primary'>
+				<h1>The Movies Saga!</h1>
+			</Typography>
+			<Router>
+				<Route path='/' exact>
+					<MovieList />
+				</Route>
+				<Route path='/addMovie'>
+					<AddMovie />
+				</Route>
+				<Route path='/editMovie/:id'>
+					<EditMovie />
+				</Route>
 
-            <Route path="/details/:id">
-                <Details />
-            </Route>
-                <Route path="/top10">
-                    <Top10Movies />
-                </Route>
-        </Router>
-        </div>
-    );
+				<Route path='/details/:id'>
+					<Details />
+				</Route>
+				<Route path='/top10'>
+					<Top10Movies />
+				</Route>
+			</Router>
+		</div>
+	);
 }
 
 export default App;
