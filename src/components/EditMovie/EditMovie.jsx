@@ -7,23 +7,28 @@ import Select from 'react-select';
 import loadingGif from '../../images/loading.gif';
 
 function EditMovie(props) {
+    // getting this movie on page load and all genres for all movies
 	useEffect(() => {
 		dispatch({ type: 'THIS_MOVIE_SAGA', payload: id });
 		dispatch({ type: 'FETCH_GENRES_SAGA' });
 	}, []);
 
+    // storing the current movie based on id and storing all genres from the server
 	const movie = useSelector((store) => store.thisMovie);
 	const genres = useSelector((store) => store.genres);
 
 	const dispatch = useDispatch();
 	const history = useHistory();
 
+    // grabs the id from the url
 	const { id } = useParams();
 
+    // held states for movie title, description, and genres the movie currently holds
 	const [title, setTitle] = useState(movie.movie.title);
 	const [description, setDescription] = useState(movie.movie.description);
 	const [genresSelected, setGenresSelected] = useState(movie.genres);
 
+    // checks validitdy of the inputs for empty values and sends object to the server
 	const editMoviePage = () => {
 		title.length === 0 ||
 		description.length === 0 ||
@@ -35,21 +40,23 @@ function EditMovie(props) {
 			  }) && history.push('/');
 	};
 
+    // stores the current input values into the held states
 	const changeTitle = (event) => {
 		setTitle(event.target.value);
 	};
-
 	const changeDescription = (event) => {
 		setDescription(event.target.value);
 	};
 
 	return (
 		<div>
+            {/* loading screen until both reducers have a value */}
 			{movie.length === 0 || genres.length === 0 ? (
 				<img src={loadingGif} />
 			) : (
 				<div>
 					<Typography variant="h5">Edit Movie</Typography>
+                    {/* form for all inputs */}
 					<Box
 						component="form"
 						sx={{
@@ -59,6 +66,7 @@ function EditMovie(props) {
 						autoComplete="off"
 						justify="center"
 					>
+                        {/* first row */}
 						<Stack
 							direction="row"
 							mt={5}
@@ -66,6 +74,7 @@ function EditMovie(props) {
 							justifyContent="center"
 							alignItems="center"
 						>
+                            {/* movie title field */}
 							<TextField
 								required
 								id="movie-title"
@@ -75,6 +84,7 @@ function EditMovie(props) {
 								label="Title"
 								variant="standard"
 							/>
+                            {/* all genres field */}
 							<Select
 								required
 								id="movie-genres"
@@ -87,7 +97,9 @@ function EditMovie(props) {
 								placeholder="Select Genres"
 							/>
 						</Stack>
+                        {/* second row */}
 						<Stack spacing={2} justifyContent="center" alignItems="center">
+                            {/* movie description field */}
 							<TextareaAutosize
 								required
 								id="movie-description"
@@ -99,7 +111,9 @@ function EditMovie(props) {
 								style={{ width: 500 }}
 							/>
 						</Stack>
+                        {/* third row */}
 						<Stack direction="row" mt={5} spacing={3} justifyContent="center">
+                            {/* cancel button */}
 							<Button
 								variant="contained"
 								color="secondary"
@@ -108,6 +122,7 @@ function EditMovie(props) {
 							>
 								Cancel
 							</Button>
+                            {/* save button */}
 							<Button
 								variant="contained"
 								color="primary"

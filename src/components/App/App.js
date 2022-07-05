@@ -1,6 +1,7 @@
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import './App.css';
+// component imports
 import AddMovie from '../AddMovie/AddMovie';
 import EditMovie from '../EditMovie/EditMovie';
 import MovieList from '../MovieList/MovieList';
@@ -13,6 +14,7 @@ function App(props) {
 			<Typography variant="h4" color="primary" gutterBottom>
 				The Movies Saga!
 			</Typography>
+            {/* all the routes in the HashRouter */}
 			<Router>
 				<Route path="/" exact>
 					<MovieList />
@@ -23,7 +25,6 @@ function App(props) {
 				<Route path="/editMovie/:id">
 					<EditMovie />
 				</Route>
-
 				<Route path="/details/:id">
 					<Details />
 				</Route>

@@ -18,21 +18,26 @@ function MovieItem(props) {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
+    // pushes to the details page
 	const showDetails = () => {
 		history.push(`/details/${props.movie.id}`);
 	};
 
+    // on 'like' button click, run this to add 1 like to database for the movie based on id
 	const likeMovie = () => {
 		dispatch({ type: 'LIKE_MOVIE_SAGA', payload: props.movie.id });
 	};
 
+    // deletes the movie selected based on id
 	const deleteMovie = () => {
 		dispatch({ type: 'DELETE_MOVIE_SAGA', payload: props.movie.id });
 	};
 
 	return (
 		<Grid item>
+            {/* each item now that's a movie 'item' card */}
 			<Card sx={{ width: 270, maxHeight: 500 }}>
+                {/* displays poster and can be clicked */}
 				<CardActionArea onClick={showDetails}>
 					<CardMedia
 						component="img"
@@ -41,15 +46,18 @@ function MovieItem(props) {
 						alt={props.movie.title}
 					/>
 				</CardActionArea>
+                {/* movie name in content area */}
 				<CardContent>
 					<Typography color="primary">{props.movie.title}</Typography>
 				</CardContent>
+                {/* card action buttons */}
 				<CardActions>
 					<Stack
 						direction="row"
 						divider={<Divider orientation="vertical" flexItem />}
 						spacing={5.2}
 					>
+                        {/* likes button */}
 						<Button
 							onClick={likeMovie}
 							size="small"
@@ -59,6 +67,7 @@ function MovieItem(props) {
 						>
 							Likes: {props.movie.likes}
 						</Button>
+                        {/* delete button */}
 						<Button
 							onClick={deleteMovie}
 							size="small"

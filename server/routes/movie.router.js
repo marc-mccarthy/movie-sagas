@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
+// gets all movies in alphabetical order
 router.get('/', (req, res) => {
 	pool
 		.query(`SELECT * FROM "movies" ORDER BY "title" ASC`)
@@ -14,6 +15,7 @@ router.get('/', (req, res) => {
 		});
 });
 
+// gets the one movie with all rows of genres in movies_genres table
 router.get('/details', (req, res) => {
 	pool
 		.query(
@@ -29,6 +31,7 @@ router.get('/details', (req, res) => {
 		});
 });
 
+// gets top 10 movies based on integer of likes
 router.get('/top10Movies', (req, res) => {
 	pool
 		.query(`SELECT * FROM "movies" ORDER BY "likes" DESC LIMIT 10;`)
@@ -41,6 +44,7 @@ router.get('/top10Movies', (req, res) => {
 		});
 });
 
+// creates new movie in database
 router.post('/add', (req, res) => {
 	// RETURNING "id" will give us back the id of the created movie
 	// FIRST QUERY MAKES MOVIE
@@ -55,6 +59,7 @@ router.post('/add', (req, res) => {
 			const createdMovieId = result.rows[0].id;
 			// Now handle the genre reference
 			// SECOND QUERY ADDS GENRE FOR THAT NEW MOVIE
+            // loops through the genres array and adds each genre to the database based on movie id
 			req.body.genresSelected.forEach((genre) => {
 				pool
 					.query(`INSERT INTO "movies_genres" ("movie_id", "genre_id") VALUES ($1, $2);`, [createdMovieId, genre.value])
@@ -72,6 +77,7 @@ router.post('/add', (req, res) => {
 		});
 });
 
+// updates movie in the database
 router.put('/update', (req, res) => {
 	pool
 		.query(`UPDATE "movies" SET title = $1, description = $2 WHERE id = $3;`, [
@@ -84,6 +90,8 @@ router.put('/update', (req, res) => {
 			console.log(`ERROR: Update movie basics error: ${error}`);
 			res.sendStatus(500);
 		});
+	// Now handle the genre references
+	// deletes all genre references based on the movie id
 	pool
 		.query(`DELETE FROM "movies_genres" WHERE movie_id = $1;`, [req.body.id])
 		.then((result) => {})
@@ -91,6 +99,7 @@ router.put('/update', (req, res) => {
 			console.log(`ERROR: Delete movie genres error: ${error}`);
 			res.sendStatus(500);
 		});
+	// loops through the genres array and adds each genre to the database based on movie id
 	req.body.genresSelected.forEach((genre) => {
 		pool
 			.query(
@@ -106,6 +115,7 @@ router.put('/update', (req, res) => {
 	res.sendStatus(200);
 });
 
+// updates likes incrementally for the movie selected
 router.put('/like', (req, res) => {
 	pool
 		.query(`UPDATE "movies" SET "likes" = "likes" + 1 WHERE "id" = $1;`, [
@@ -120,10 +130,13 @@ router.put('/like', (req, res) => {
 		});
 });
 
+// deletes the movie from the database
 router.delete('/delete', (req, res) => {
+	// deletes all movie_id associated genres first
 	pool
 		.query(`DELETE FROM "movies_genres" WHERE "movie_id" = $1;`, [req.query.id])
 		.then((result) => {
+            // deletes the movie from the movies database second
 			pool
 				.query(`DELETE FROM "movies" WHERE "id" = $1;`, [req.query.id])
 				.then((result) => {

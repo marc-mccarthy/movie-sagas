@@ -6,19 +6,24 @@ import { Box, Stack, TextareaAutosize } from '@mui/material';
 import Select from 'react-select';
 
 function AddMovie() {
+	// getting all genres from server on page load
 	useEffect(() => {
 		dispatch({ type: 'FETCH_GENRES_SAGA' });
 	}, []);
 
-	const history = useHistory();
-	const dispatch = useDispatch();
+	// storing all genres from server
 	const genres = useSelector((store) => store.genres);
 
+	const history = useHistory();
+	const dispatch = useDispatch();
+
+	// held states for movie title, poster, description, and genres the movie currently holds
 	const [title, setTitle] = useState('');
 	const [poster, setPoster] = useState('');
 	const [description, setDescription] = useState('');
 	const [genresSelected, setGenresSelected] = useState([]);
 
+	// checks validitdy of the inputs for empty values and sends object to the server
 	const addMoviePage = () => {
 		title.length === 0 ||
 		poster.length === 0 ||
@@ -31,14 +36,13 @@ function AddMovie() {
 			  }) && history.push('/');
 	};
 
+	// stores the current input values into the held states
 	const changeTitle = (event) => {
 		setTitle(event.target.value);
 	};
-
 	const changeImageUrl = (event) => {
 		setPoster(event.target.value);
 	};
-
 	const changeDescription = (event) => {
 		setDescription(event.target.value);
 	};
@@ -46,6 +50,7 @@ function AddMovie() {
 	return (
 		<div>
 			<Typography variant="h5">Add New Movie</Typography>
+			{/* form for all inputs */}
 			<Box
 				component="form"
 				sx={{
@@ -55,6 +60,7 @@ function AddMovie() {
 				autoComplete="off"
 				justify="center"
 			>
+				{/* first row */}
 				<Stack
 					direction="row"
 					justifyContent="center"
@@ -62,6 +68,7 @@ function AddMovie() {
 					mt={3}
 					spacing={3}
 				>
+					{/* movie title field */}
 					<TextField
 						label="Title"
 						required
@@ -72,6 +79,7 @@ function AddMovie() {
 						placeholder="Tropic Thunder"
 						variant="standard"
 					/>
+					{/* movie poster field */}
 					<TextField
 						label="Poster"
 						required
@@ -81,6 +89,7 @@ function AddMovie() {
 						placeholder="images/tropic-thunder.jpg"
 						variant="standard"
 					/>
+					{/* all genres field */}
 					<Select
 						label="Genres"
 						required
@@ -94,7 +103,9 @@ function AddMovie() {
 						placeholder="Select Genres"
 					/>
 				</Stack>
+                {/* second row */}
 				<Stack spacing={2} justifyContent="center" alignItems="center">
+					{/* movie description field */}
 					<TextareaAutosize
 						label="Description"
 						required
@@ -106,13 +117,9 @@ function AddMovie() {
 						style={{ width: 500 }}
 					/>
 				</Stack>
-				<Stack
-					direction="row"
-					mt={5}
-					spacing={3}
-					justifyContent="center"
-					alignItems="center"
-				>
+				{/* third row */}
+				<Stack direction="row" mt={5} spacing={3} justifyContent="center">
+					{/* cancel button */}'
 					<Button
 						variant="contained"
 						color="secondary"
@@ -121,6 +128,7 @@ function AddMovie() {
 					>
 						Cancel
 					</Button>
+					{/* save button */}
 					<Button
 						variant="contained"
 						color="primary"

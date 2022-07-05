@@ -21,14 +21,17 @@ function Top10Movies(props) {
 
 	return (
 		<div>
+            {/* loading screen until this reducer has a value */}
 			{top10Movies.length === 0 ? (
 				<img src={loadingGif} />
 			) : (
 				<main>
+                    {/* back to movies list button */}
 					<Button onClick={backToMovies} variant="contained" color="secondary">
 						Back to Movies List
 					</Button>
 					<Box mt={4}>
+                        {/* container to hold all movie cards */}
 						<Grid
 							container
 							display="flex"
@@ -36,6 +39,7 @@ function Top10Movies(props) {
 							justify="center"
 							spacing={4}
 						>
+                            {/* maps through 10 most likes movies in reducer */}
 							{top10Movies.map((movie) => (
 								<MovieItem key={movie.id} movie={movie} />
 							))}
