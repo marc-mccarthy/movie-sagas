@@ -71,8 +71,6 @@ function AddMovie() {
 						onChange={changeTitle}
 						placeholder="Tropic Thunder"
 						variant="standard"
-						error={title.length === 0}
-						helperText={title.length === 0 ? 'Title is required' : ''}
 					/>
 					<TextField
 						label="Poster"
@@ -82,8 +80,6 @@ function AddMovie() {
 						onChange={changeImageUrl}
 						placeholder="images/tropic-thunder.jpg"
 						variant="standard"
-						error={poster.length === 0}
-						helperText={poster.length === 0 ? 'Poster is required' : ''}
 					/>
 					<Select
 						label="Genres"
@@ -96,7 +92,6 @@ function AddMovie() {
 						getOptionLabel={(genre) => genre.name}
 						onChange={(selected) => setGenresSelected(selected)}
 						placeholder="Select Genres"
-						error={genresSelected.length === 0}
 					/>
 				</Stack>
 				<Stack spacing={2} justifyContent="center" alignItems="center">
@@ -109,7 +104,6 @@ function AddMovie() {
 						onChange={changeDescription}
 						placeholder="Funniest movie of all time! Seen it too many times to count."
 						style={{ width: 500 }}
-						error={description.length === 0}
 					/>
 				</Stack>
 				<Stack

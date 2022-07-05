@@ -32,11 +32,7 @@ function MovieList(props) {
 				<img src={loadingGif} />
 			) : (
 				<main>
-					<Stack
-                        direction="row"
-                        spacing={3}
-                        justifyContent="center"
-                    >
+					<Stack direction="row" spacing={3} justifyContent="center" mb={3}>
 						<Button
 							onClick={addMoviePage}
 							variant="contained"
@@ -54,20 +50,20 @@ function MovieList(props) {
 							Top 10 Movies
 						</Button>
 					</Stack>
-                    <Typography
-                            variant="h5"
-                    >
-						<Stack
-							m={2}
-							direction="row"
-							justifyContent="center"
-							alignItems="center"
-							spacing={3}
+					<Typography variant="h6">
+						<Grid
+							container
+							display="flex"
+							wrap="wrap"
+							justify="center"
+							spacing={2}
 						>
 							{genres.map((genre) => (
-                                <h6>{genre.name}</h6>
+								<Grid item key={genre.id}>
+                                    {genre.name}
+								</Grid>
 							))}
-						</Stack>
+						</Grid>
 					</Typography>
 					<Box mt={4}>
 						<Grid

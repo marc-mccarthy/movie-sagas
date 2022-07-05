@@ -1,18 +1,18 @@
 import { createMuiTheme } from '@material-ui/core/styles'
-import { purple, green } from '@mui/material/colors';
+import { purple, green, red } from '@mui/material/colors';
 
 const theme = createMuiTheme({
     palette: {
         primary: {
             main: purple[500],
-            secondary: purple[500],
+            secondary: purple[300],
         },
         secondary: {
-            main: green[500],
-            secondary: green[500],
+            main: green[600],
+            secondary: green[400],
         },
     },
-    typography: {   
+    typography: {
         fontFamily: 'Carter One',
         fontSize: 14,
     },

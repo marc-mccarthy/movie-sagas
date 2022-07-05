@@ -72,8 +72,6 @@ function EditMovie(props) {
 								autoFocus
 								value={title}
 								onChange={changeTitle}
-								error={title.length === 0}
-								helperText={title.length === 0 ? 'Title is required' : ''}
 								label="Title"
 								variant="standard"
 							/>
@@ -82,10 +80,6 @@ function EditMovie(props) {
 								id="movie-genres"
 								closeMenuOnSelect={false}
 								isMulti
-								error={genresSelected.length === 0}
-								helperText={
-									genresSelected.length === 0 ? 'Genres are required' : ''
-								}
 								defaultValue={genresSelected}
 								options={genres}
 								onChange={(selected) => setGenresSelected(selected)}
@@ -100,10 +94,6 @@ function EditMovie(props) {
 								value={description}
 								minRows={15}
 								maxRows={20}
-								error={description.length === 0}
-								helperText={
-									description.length === 0 ? 'Description is required' : ''
-								}
 								onChange={changeDescription}
 								aria-label="Description"
 								style={{ width: 500 }}
