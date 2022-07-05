@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { TextField, Button, Typography } from "@material-ui/core";
 import { Box, Stack, TextareaAutosize } from "@mui/material";
 import Select from 'react-select';
-import { ContentCutOutlined } from "@mui/icons-material";
 
 function AddMovie() {
 
@@ -16,9 +15,9 @@ function AddMovie() {
     const dispatch = useDispatch();
     const genres = useSelector(store => store.genres);
 
-    const [title, setTitle] = useState("Tropic Thunder");
-    const [poster, setPoster] = useState("images/tropic-thunder.jpg");
-    const [description, setDescription] = useState("Funniest movie of all time!");
+    const [title, setTitle] = useState('');
+    const [poster, setPoster] = useState('');
+    const [description, setDescription] = useState('');
     const [genresSelected, setGenresSelected] = useState([]);
 
     const addMoviePage = () => {
@@ -40,74 +39,92 @@ function AddMovie() {
 
     return (
         <div>
-            <Typography color="primary">
+            <Typography>
                 <h2>Add New Movie</h2>
             </Typography>
-
             <Box
                 component="form"
-                sx={{'& .MuiTextField-root': { m: 4, width: '30ch' },}}
+                sx={{
+                    '& .MuiTextField-root': { m: 4, width: '30ch' },
+                }}
                 noValidate
                 autoComplete="off"
-                align="center"
+                justify="center"
             >
-                <Stack direction="row" mt={5} spacing={3} sx={{ width: 1000 }}>
+                <Stack
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                    mt={ 3 }
+                    spacing={ 3 }
+                >
                     <TextField
                         required id="movie-title"
                         autoFocus
-                        onChange={changeTitle}
+                        onChange={ changeTitle }
                         label="Title"
-                        defaultValue={title}
+                        defaultValue={ title }
                         placeholder="Tropic Thunder"
                         variant="standard"
                     />
                     <TextField
-                        required id="movie-image-url"
-                        onChange={changeImageUrl}
+                        required id="movie-poster"
+                        onChange={ changeImageUrl }
                         label="Image Url"
-                        defaultValue="images/tropic-thunder.jpg"
+                        defaultValue={ poster }
                         placeholder="images/tropic-thunder.jpg"
                         variant="standard"
                     />
                     <Select
                         required id="movie-genres"
-                        closeMenuOnSelect={false}
+                        closeMenuOnSelect={ false }
                         isMulti
+                        autosize
                         options={ genres }
                         onChange={ (selected) => setGenresSelected(selected) }
                         getOptionLabel={ (genre) => genre.name }
                         placeholder="Select Genres"
                     />
                 </Stack>
-
-                <Stack spacing={2}>
+                <Stack
+                    spacing={ 2 }
+                    justifyContent="center"
+                    alignItems="center"
+                >
                     <TextareaAutosize
                         required id="movie-description"
-                        minRows={5}
-                        maxRows={10}
-                        onChange={changeDescription}
+                        minRows={ 15 }
+                        maxRows={ 20 }
+                        onChange={ changeDescription }
                         aria-label="Description"
-                        defaultValue="Funniest movie of all time!"
-                        placeholder="Funniest movie of all time!"
+                        placeholder="Funniest movie of all time! Seen it too many times to count."
                         style={{ width: 500 }}
                     />
                 </Stack>
-
-                <Stack direction="row" mt={5} spacing={3} sx={{ width: 1000 }}>
+                <Stack
+                    direction="row"
+                    mt={ 5 }
+                    spacing={ 3 }
+                    justifyContent="center"
+                    alignItems="center"
+                >
                     <Button
-                        variant="outlined"
+                        variant="contained"
                         color="secondary"
-                        onClick={() => history.push('/')}>
+                        onClick={() => history.push('/')}
+                        style={{ width: 100 }}
+                    >
                         Cancel
                     </Button>
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={addMoviePage}>
+                        onClick={addMoviePage}
+                        style={{ width: 100 }}
+                    >
                         Save
                     </Button>
                 </Stack>
-
             </Box>
         </div>
     );

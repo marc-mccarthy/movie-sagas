@@ -23,64 +23,51 @@ function MovieItem( props ) {
         dispatch({ type: 'DELETE_MOVIE_SAGA', payload: props.movie.id });
     }
 
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: theme.palette.mode === 'light' ? '#1A2027' : '#fff',
-        ...theme.typography.body2,
-        padding: theme.spacing(0),
-        textAlign: 'center',
-        color: theme.palette.text.primary,
-    }));
-
     return (
         <Grid item>
-            <Item >
-                <Card
-                    align="center"
-                    justify="center"
-                    sx={{ width: 270, maxHeight: 500 }}
+            <Card
+                sx={{ width: 270, maxHeight: 500 }}
+            >
+                <CardActionArea
+                    onClick={showDetails}
                 >
-                    <CardActionArea
-                        onClick={showDetails}>
-                        <CardMedia
-                            component="img"
-                            height="350"
-                            image={props.movie.poster}
-                            alt={props.movie.title}
-                        />
-                    </CardActionArea>
-                    <CardContent>
-                        <Typography color="primary">
-                            {props.movie.title}
-                        </Typography>
-                    </CardContent>
-                    <CardActions>
-                        <Stack
-                            direction="row"
-                            divider={<Divider orientation="vertical" flexItem />}
-                            spacing={2}
-                        >
-                            <Item>
-                                <Button
-                                    onClick={likeMovie}
-                                    size="small"
-                                    variant="contained"
-                                    color="primary">
-                                    Likes: {props.movie.likes}
-                                </Button>
-                            </Item>
-                            <Item>
-                                <Button
-                                    onClick={deleteMovie}
-                                    size="small"
-                                    variant="outlined"
-                                    color="secondary">
-                                    Delete
-                                </Button>
-                            </Item>
-                        </Stack>
-                    </CardActions>
-                </Card>
-            </Item>
+                    <CardMedia
+                        component="img"
+                        height="350"
+                        image={props.movie.poster}
+                        alt={props.movie.title}
+                    />
+                </CardActionArea>
+                <CardContent>
+                    <Typography
+                        color="primary"
+                    >
+                        {props.movie.title}
+                    </Typography>
+                </CardContent>
+                <CardActions>
+                    <Stack
+                        direction="row"
+                        divider={<Divider orientation="vertical" flexItem />}
+                        spacing={7.2}
+                    >
+                        <Button
+                            onClick={likeMovie}
+                            size="small"
+                            variant="outlined"
+                            color="primary">
+                            Likes: {props.movie.likes}
+                        </Button>
+                        <Button
+                            onClick={deleteMovie}
+                            size="small"
+                            variant="outlined"
+                            color="secondary">
+                            Delete
+                        </Button>
+                    </Stack>
+                </CardActions>
+            </Card>
         </Grid>
     )
 }

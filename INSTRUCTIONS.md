@@ -108,13 +108,13 @@ This new page should show:
 
 The edit page should have the buttons:
 
-- `Cancel` button, which should bring the user to the Details Page
-- `Save` button, which should update the title and description in the database and bring the user to the Details Page
+[x] `Cancel` button, which should bring the user to the Details Page
+[x] `Save` button, which should update the title and description in the database and bring the user to the Details Page
 
 ### Other Ideas
 
 - [x] Display the current values in the input (title) and textarea (description) on the Edit Page
-- [ ] Display all genres on movie list page. Research [array_agg](https://stackoverflow.com/questions/43458174/how-to-save-and-return-javascript-object-with-subarray-in-normalized-sql) to make this possible.
+- [x] Display all genres on movie list page. Research [array_agg](https://stackoverflow.com/questions/43458174/how-to-save-and-return-javascript-object-with-subarray-in-normalized-sql) to make this possible.
 - [ ] Move sagas and reducers out of your `index.js` and into separate files (ideally in `src/redux/reducers` and `src/redux/sagas` folders).
 - [x] Allow the user to refresh the details or edit page. The url for the details page would be something like `/details/1` for movie with id of `1`. Research [react router params](https://reacttraining.com/react-router/web/example/url-params).
 - [x] Allow the user to add a genre to a movie.
@@ -122,6 +122,4 @@ The edit page should have the buttons:
 - [ ] Only display the top 10 movies, and allow the user to search for movie titles with a search bar on the home page (you can do this on the client side or the server side, server side is a bigger stretch, but good practice).
 
 - [] Data validation
-- [] Styling to center for pages
-- [] Button styling colors
 - [] Edit movie page reload break
