@@ -4,7 +4,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
 import { Stack } from '@mui/material';
 import loadingGif from '../../images/loading.gif';
-import Genres from '../Genres/Genres';
 import './Details.css';
 
 function Details(props) {
