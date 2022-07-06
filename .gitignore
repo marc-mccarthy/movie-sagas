@@ -6,8 +6,10 @@
 # testing
 /coverage
 
-# misc
+# store
 .DS_Store
+
+# environment
 .env.local
 .env
 .env.development.local
