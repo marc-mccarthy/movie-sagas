@@ -9,6 +9,7 @@ import loadingGif from '../../images/loading.gif';
 function EditMovie(props) {
     // getting this movie on page load and all genres for all movies
 	useEffect(() => {
+        console.log(id);
 		dispatch({ type: 'THIS_MOVIE_SAGA', payload: id });
 		dispatch({ type: 'FETCH_GENRES_SAGA' });
 	}, []);

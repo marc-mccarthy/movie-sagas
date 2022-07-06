@@ -36,7 +36,7 @@ function MovieItem(props) {
 	return (
 		<Grid item>
             {/* each item now that's a movie 'item' card */}
-			<Card sx={{ width: 270, maxHeight: 500 }}>
+            <Card style={{border: "2px solid grey"}} sx={{ width: 270, maxHeight: 500 }}>
                 {/* displays poster and can be clicked */}
 				<CardActionArea onClick={showDetails}>
 					<CardMedia

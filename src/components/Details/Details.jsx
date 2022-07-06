@@ -63,7 +63,7 @@ function Details(props) {
 							<Typography variant="h5">
 								<ul>
 									{movie.genres.map((genre) => {
-										return <li>{genre.name}</li>;
+										return <li key={genre.value}>{genre.name}</li>;
 									})}
 								</ul>
                             {/* movie description */}
