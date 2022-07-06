@@ -2,7 +2,7 @@
 
 ## Heroku Link
 
-[Movie Sagas](https://movies-sagas-1.herokuapp.com/#/)
+[Movie Sagas](https://movie-sagas-1.herokuapp.com/#/)
 
 ## Description
 
