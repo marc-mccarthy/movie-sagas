@@ -1,5 +1,6 @@
 {
     "name": "movie-sagas",
+    "description": "Movie Sagas",
     "engines": {
         "node": "18.x"
     },
