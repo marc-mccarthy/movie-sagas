@@ -10,7 +10,7 @@ This is a movie page with a list of my favorite movies (some of them) that I cou
 
 ## Interface
 
-![wireframe](wireframes/wireframe.png)
+![wireframe](wireframes/wireframe.gif)
 
 ## Languages
 
